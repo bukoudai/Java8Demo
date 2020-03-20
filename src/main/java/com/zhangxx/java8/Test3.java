@@ -3,6 +3,7 @@ package com.zhangxx.java8;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Function;
 
 public class Test3 {
@@ -27,6 +28,8 @@ public class Test3 {
 //        Function<Object,String> function = Object::toString;
 //        System.out.println(function.getClass().getInterfaces()[0]);
 
-
+        UUID uuid = UUID.randomUUID();
+        String s = uuid.toString().replaceAll("-", "");
+        System.out.println(s);
     }
 }
