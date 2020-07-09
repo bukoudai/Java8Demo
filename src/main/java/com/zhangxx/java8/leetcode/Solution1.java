@@ -4,6 +4,7 @@ package com.zhangxx.java8.leetcode;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Solution1 {
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -120,31 +121,112 @@ public class Solution1 {
      * @return
      */
     public int[] divingBoard(int shorter, int longer, int k) {
-        if(k==0) {
+        if (k == 0) {
             return new int[]{};// 判空
         }
 
-        if(shorter==longer) {// 短板和长版相等，结果只存在一种
-            return new int[]{shorter*k};
+        if (shorter == longer) {// 短板和长版相等，结果只存在一种
+            return new int[]{shorter * k};
         }
-        int[] res=new int[k+1];
+        int[] res = new int[k + 1];
 
-          Arrays.fill(res,shorter*k); // 创建数组默认值为shorter*K最短的跳板长度
-        for(int i=0;i<res.length;i++){
-            res[i] += i*(longer-shorter); // longer-shorter 差值
+        Arrays.fill(res, shorter * k); // 创建数组默认值为shorter*K最短的跳板长度
+        for (int i = 0; i < res.length; i++) {
+            res[i] += i * (longer - shorter); // longer-shorter 差值
         }
         return res;
 
     }
+
+    /**
+     * 中位数
+     *
+     * @param nums1
+     * @param nums2
+     * @return
+     */
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-       int all= nums1.length+nums2.length;
-        int z=all/2;
-        if(all%2>0){
+        int all = nums1.length + nums2.length;
+        int z = all / 2;
+        if (all % 2 > 0) {
 
 
         }
 
         return 0;
+    }
+
+    /***
+     * 面试题 17.13. 恢复空格 哦，不！你不小心把一个长篇文章中的空格、标点都删掉了，并且大写也弄成了小写。像句子"I reset the computer. It still didn’t boot!"已经变成了"iresetthecomputeritstilldidntboot"。在处理标点符号和大小写之前，你得先把它断成词语。当然了，你有一本厚厚的词典dictionary，不过，有些词没在词典里。假设文章用sentence表示，设计一个算法，把文章断开，要求未识别的字符最少，返回未识别的字符数。
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/re-space-lcci
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     * @param dictionary
+     * @param sentence
+     * @return
+     */
+    public static int respace(String[] dictionary, String sentence) {
+        Set<String> dic = new HashSet<>(Arrays.asList(dictionary));
+
+        int n = sentence.length();
+        //dp[i]表示sentence前i个字符所得结果
+        int[] dp = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            dp[i] = dp[i - 1] + 1;  //先假设当前字符作为单词不在字典中 dp[1]=1
+            for (int j = 0; j < i; j++) {
+                String words = sentence.substring(j, i);
+                if (dic.contains(words)) {
+                    dp[i] = Math.min(dp[i], dp[j]);
+                }
+            }
+        }
+        return dp[n];
+
+    }
+
+    /**
+     * 优化  记录字典单词最后一个字符 和单词长度
+     *
+     * @param dictionary
+     * @param sentence
+     * @return
+     */
+    public static int respace2(String[] dictionary, String sentence) {
+        Set<String> dic = new HashSet<>(Arrays.asList(dictionary));
+        HashMap<Character, HashSet<Integer>> map = new HashMap<>();
+        for (String s : dic) {
+            int size = s.length();
+            HashSet<Integer> integers = map.get(s.charAt(size - 1));
+            if (integers == null) {
+                integers = new HashSet<>();
+            }
+            integers.add(size);
+            map.put(s.charAt(size - 1), integers);
+        }
+
+        int n = sentence.length();
+        //dp[i]表示sentence前i个字符所得结果
+        int[] dp = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            dp[i] = dp[i - 1] + 1;  //先假设当前字符作为单词不在字典中 dp[1]=1
+            String words = sentence.substring(0, i);
+            int length = words.length();
+            HashSet<Integer> integers = map.get(words.charAt(length - 1));
+            if (integers != null)  {
+                for (Integer integer : integers) {
+                    if (length>=integer) {
+                        words = sentence.substring(i-integer, i);
+                        if (dic.contains(words)) {
+                            dp[i] = Math.min(dp[i], dp[i-integer]);
+                            //多个单词符合选择最长的
+                        }
+                    }
+                }
+            }
+        }
+        return dp[n];
+
     }
 }
 

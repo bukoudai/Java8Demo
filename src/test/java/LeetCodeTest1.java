@@ -27,6 +27,15 @@ public class LeetCodeTest1 {
         System.out.println(Solution1.lengthOfLongestSubstring(" a"));
         System.out.println(Solution1.lengthOfLongestSubstring("dvdf"));
     }
+    @Test
+    public  void respace(){
+
+        String[] dictionary = {"looked","just","like","her","brother"};
+        String  sentence = "jesslookedjustliketimherbrother";
+
+        System.out.println(Solution1.respace(dictionary,sentence));
+        System.out.println(Solution1.respace2(dictionary,sentence));
+    }
 
 
 }
