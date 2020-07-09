@@ -65,8 +65,41 @@ public class ZipUtil {
         return relativePath;
     }
 
+    /**
+     * 获取相对路径
+     * @param dirPath 源文件路径
+     * @param file 准备压缩的单个文件
+     * @param haveName 是否包含待压缩目录
+     * */
+    public static String getRelativePath(String dirPath,File file,boolean haveName){
 
 
+        File dirFile=new File(dirPath);
+        String relativePath=file.getName();
+
+        while (true){
+            file=file.getParentFile();
+            if(file==null){
+                break;
+            }
+            if(file.equals(test(dirFile,haveName))){
+                break;
+            }
+            else {
+                relativePath=file.getName()+"/"+relativePath;
+            }
+        }
+        return relativePath;
+    }
+public static File test(File dirFile,boolean haveName){
+    if (haveName) {
+        return dirFile.getParentFile();
+    }else {
+        return dirFile;
+    }
+
+
+}
     /**
      *@param destPath 解压目标路径
      *@param fileName 解压文件的相对路径
@@ -136,8 +169,8 @@ public class ZipUtil {
         List<File> fileList= getAllFile(dirFile);
 
         byte[] buffer=new byte[BUFFER];
-        ZipEntry zipEntry=null;
-        int readLength=0;     //每次读取出来的长度
+        ZipEntry zipEntry;
+        int readLength;     //每次读取出来的长度
 
         try {
             // 对输出文件做CRC32校验
@@ -147,9 +180,10 @@ public class ZipUtil {
 
             for(File file:fileList){
 
-                if(file.isFile()){   //若是文件，则压缩文件
 
-                    zipEntry=new ZipEntry(getRelativePath(dirPath,file));  //
+                if(file.isFile()){   //若是文件，则压缩文件
+                    String relativePath = getRelativePath(dirPath, file,true);
+                    zipEntry=new ZipEntry(relativePath);  //
                     zipEntry.setSize(file.length());
                     zipEntry.setTime(file.lastModified());
                     zos.putNextEntry(zipEntry);
@@ -162,15 +196,13 @@ public class ZipUtil {
                     is.close();
                     System.out.println("file compress:"+file.getCanonicalPath());
                 }else {     //若是空目录，则写入zip条目中
-
-                    zipEntry=new ZipEntry(getRelativePath(dirPath,file));
+                    String relativePath = getRelativePath(dirPath, file,true);
+                    zipEntry=new ZipEntry(relativePath);
                     zos.putNextEntry(zipEntry);
                     System.out.println("dir compress: " + file.getCanonicalPath()+"/");
                 }
             }
             zos.close();  //最后得关闭流，不然压缩最后一个文件会出错
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
