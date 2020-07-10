@@ -39,10 +39,12 @@ public class LeetCodeTest1 {
     @Test
     public  void maxProfit(){
 
-        int[] a = {1,2,0,0,6};
+        int[] a = { 1,2,3,0,2};
+        int[] b = { 4,2,1};
 
 
         System.out.println(Solution1.maxProfit(a));
+        System.out.println(Solution1.maxProfit(b));
 
     }
 

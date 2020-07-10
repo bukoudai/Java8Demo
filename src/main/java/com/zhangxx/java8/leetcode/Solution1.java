@@ -229,64 +229,29 @@ public class Solution1 {
     }
 
     public static int maxProfit(int[] prices) {
-        //1 2
-       //持有价格
-        int now =0;
-        //状态 0 可买入 1 持有 2 冻结
-       int state=0;
-       //最大收益
-        int maxVlue=0;
-        //收益
-        int vlue=0;
-        if(prices.length<2){
-            return maxVlue;
-        }
-        //可用策略 0
-        //第一天
-        LinkNode a0 =new LinkNode(0,0);
-        //第二天
-        List<LinkNode> add = a0.add(prices[1]);
-        //第三天
-        for (int i = 0; i < add.size(); i++) {
-            LinkNode linkNode = add.get(i);
-            linkNode.add(prices[2]);
+        int n=prices.length;
 
+        if(n<2){
+            //一天没法卖出
+            return 0;
+        };
+        int dp[][]=new int[n][3];
+        //第一天只能买入 收益为 负
+        dp[0][0]=-prices[0];
+        for(int i=1;i<n;i++){
+            //0  持有
+            dp[i][0] =   Math.max(dp[i - 1][0],dp[i - 1][1] - prices[i]);
+            //1 未持有不在冷冻期 前一天 冻结 或者前一天不动
+            dp[i][1] =  Math.max(dp[i - 1][2],dp[i - 1][1]);
+            //2 未持有在冷冻期 可能是前一天卖掉
+            dp[i][2] = dp[i - 1][0]+ prices[i] ;
         }
 
 
-        //执行策略
-        for (int i = 0; i < prices.length; i++) {
-            if(state==0){
-                //可买入 买入
-                now=prices[i];
-                // 持有
-                state=1;
-
-            }else  if(state==1){
-                // 持有  可卖出
-                //卖出
-                vlue=prices[i]-now;
-                if(maxVlue<vlue){
-                    maxVlue=vlue;
-                }
-                now=0;
-                //冻结
-                state=2;
-
-            }else if(state==2){
-                state=0;
-
-            }
-
-        }
-
-
-
-
-
-
-        return 0;
+        return Math.max(dp[n-1][2],dp[n-1][1]);
     }
+
+
 }
 
 
