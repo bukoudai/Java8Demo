@@ -36,6 +36,15 @@ public class LeetCodeTest1 {
         System.out.println(Solution1.respace(dictionary,sentence));
         System.out.println(Solution1.respace2(dictionary,sentence));
     }
+    @Test
+    public  void maxProfit(){
+
+        int[] a = {1,2,0,0,6};
+
+
+        System.out.println(Solution1.maxProfit(a));
+
+    }
 
 
 }

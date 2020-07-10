@@ -1,10 +1,9 @@
 package com.zhangxx.java8.leetcode;
 
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import sun.reflect.generics.tree.Tree;
+
+import java.util.*;
 
 public class Solution1 {
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -227,6 +226,66 @@ public class Solution1 {
         }
         return dp[n];
 
+    }
+
+    public static int maxProfit(int[] prices) {
+        //1 2
+       //持有价格
+        int now =0;
+        //状态 0 可买入 1 持有 2 冻结
+       int state=0;
+       //最大收益
+        int maxVlue=0;
+        //收益
+        int vlue=0;
+        if(prices.length<2){
+            return maxVlue;
+        }
+        //可用策略 0
+        //第一天
+        LinkNode a0 =new LinkNode(0,0);
+        //第二天
+        List<LinkNode> add = a0.add(prices[1]);
+        //第三天
+        for (int i = 0; i < add.size(); i++) {
+            LinkNode linkNode = add.get(i);
+            linkNode.add(prices[2]);
+
+        }
+
+
+        //执行策略
+        for (int i = 0; i < prices.length; i++) {
+            if(state==0){
+                //可买入 买入
+                now=prices[i];
+                // 持有
+                state=1;
+
+            }else  if(state==1){
+                // 持有  可卖出
+                //卖出
+                vlue=prices[i]-now;
+                if(maxVlue<vlue){
+                    maxVlue=vlue;
+                }
+                now=0;
+                //冻结
+                state=2;
+
+            }else if(state==2){
+                state=0;
+
+            }
+
+        }
+
+
+
+
+
+
+        return 0;
     }
 }
 
