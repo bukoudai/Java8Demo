@@ -212,12 +212,12 @@ public class Solution1 {
             String words = sentence.substring(0, i);
             int length = words.length();
             HashSet<Integer> integers = map.get(words.charAt(length - 1));
-            if (integers != null)  {
+            if (integers != null) {
                 for (Integer integer : integers) {
-                    if (length>=integer) {
-                        words = sentence.substring(i-integer, i);
+                    if (length >= integer) {
+                        words = sentence.substring(i - integer, i);
                         if (dic.contains(words)) {
-                            dp[i] = Math.min(dp[i], dp[i-integer]);
+                            dp[i] = Math.min(dp[i], dp[i - integer]);
                             //多个单词符合选择最长的
                         }
                     }
@@ -228,29 +228,216 @@ public class Solution1 {
 
     }
 
+    /**
+     * 股票最大收益
+     * 给定一个整数数组，其中第 i 个元素代表了第 i 天的股票价格 。​
+     * <p>
+     * 设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（多次买卖一支股票）:
+     * <p>
+     * 你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+     * 卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param prices
+     * @return
+     */
     public static int maxProfit(int[] prices) {
-        int n=prices.length;
+        int n = prices.length;
 
-        if(n<2){
+        if (n < 2) {
             //一天没法卖出
             return 0;
-        };
-        int dp[][]=new int[n][3];
+        }
+        ;
+        int dp[][] = new int[n][3];
         //第一天只能买入 收益为 负
-        dp[0][0]=-prices[0];
-        for(int i=1;i<n;i++){
+        dp[0][0] = -prices[0];
+        for (int i = 1; i < n; i++) {
             //0  持有
-            dp[i][0] =   Math.max(dp[i - 1][0],dp[i - 1][1] - prices[i]);
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] - prices[i]);
             //1 未持有不在冷冻期 前一天 冻结 或者前一天不动
-            dp[i][1] =  Math.max(dp[i - 1][2],dp[i - 1][1]);
+            dp[i][1] = Math.max(dp[i - 1][2], dp[i - 1][1]);
             //2 未持有在冷冻期 可能是前一天卖掉
-            dp[i][2] = dp[i - 1][0]+ prices[i] ;
+            dp[i][2] = dp[i - 1][0] + prices[i];
         }
 
 
-        return Math.max(dp[n-1][2],dp[n-1][1]);
+        return Math.max(dp[n - 1][2], dp[n - 1][1]);
     }
 
+    /**
+     * 给定一个整数数组 nums，按要求返回一个新数组 counts。数组 counts 有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的元素的数量。
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     * todo 超时了..
+     *
+     * @param nums
+     * @return
+     */
+    public static List<Integer> countSmaller2(int[] nums) {
+
+
+        List<Integer> re = new ArrayList<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            Integer c = 0;
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] > nums[j]) {
+                    c++;
+                }
+
+            }
+
+            re.add(i, c);
+        }
+
+
+        return re;
+
+    }
+
+    public static List<Integer> countSmaller(int[] nums) {
+//todo 待完善
+
+        List<Integer> re = new ArrayList<>(nums.length);
+        for (int i = 0; i < nums.length; i++) {
+            re.add(0);
+        }
+
+        TreeNode a=new TreeNode(nums[ nums.length-1]);
+        for (int i = nums.length-2; i >=0; i--) {
+            a=TreeNode.add(a,new TreeNode(nums[i]),re,i );
+        }
+
+
+        return re;
+
+    }
+
+    /**
+     * 一些恶魔抓住了公主（P）并将她关在了地下城的右下角。地下城是由 M x N 个房间组成的二维网格。我们英勇的骑士（K）最初被安置在左上角的房间里，他必须穿过地下城并通过对抗恶魔来拯救公主。
+     * <p>
+     * 骑士的初始健康点数为一个正整数。如果他的健康点数在某一时刻降至 0 或以下，他会立即死亡。
+     * <p>
+     * 有些房间由恶魔守卫，因此骑士在进入这些房间时会失去健康点数（若房间里的值为负整数，则表示骑士将损失健康点数）；其他房间要么是空的（房间里的值为 0），要么包含增加骑士健康点数的魔法球（若房间里的值为正整数，则表示骑士将增加健康点数）。
+     * <p>
+     * 为了尽快到达公主，骑士决定每次只向右或向下移动一步。
+     * <p>
+     *  
+     * <p>
+     * 编写一个函数来计算确保骑士能够拯救到公主所需的最低初始健康点数。
+     * <p>
+     * 例如，考虑到如下布局的地下城，如果骑士遵循最佳路径 右 -> 右 -> 下 -> 下，则骑士的初始健康点数至少为 7。
+     * <p>
+     * -2 (K)   -3      3
+     * -5       -10     1
+     * 10	    30	    -5 (P)
+     *  
+     * <p>
+     * 说明:
+     * <p>
+     * 骑士的健康点数没有上限。
+     * <p>
+     * 任何房间都可能对骑士的健康点数造成威胁，也可能增加骑士的健康点数，包括骑士进入的左上角房间以及公主被监禁的右下角房间。
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/dungeon-game
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param dungeon
+     * @return
+     */
+    public static int calculateMinimumHP(int[][] dungeon) {
+        int h = dungeon.length, w = dungeon[0].length;
+        int[][] dp = new int[h][w];
+        //反向Dp
+        for (int i = h-1; i >= 0; i--) {
+            for (int j = w-1; j >= 0; j--) {
+                if(i==h-1&&j==w-1){
+                    //公主的位置
+                    dp[i][j]=1-dungeon[i][j];
+
+                }else  if(i==h-1 ){
+                    //最下面一行只能是向右
+                    dp[i][j]= dp[i][j+1]-dungeon[i][j];
+
+                }else if(j==w-1 ){
+                    //最右边只能是向下
+                    dp[i][j]=dp[i+1][j]-dungeon[i][j];
+                }else {
+                    //其他选择最小需要的血
+                    dp[i][j]=Math.min(dp[i][j+1]-dungeon[i][j] ,dp[i+1][j]-dungeon[i][j]);
+                }
+             //血量最少要为1
+                    dp[i][j]=Math.max(1, dp[i][j]);
+
+
+
+            }
+        }
+
+
+        return dp[0][0];
+    }
+
+    /**
+     * 给定两个数组，编写一个函数来计算它们的交集。
+     * 示例 1:
+     *
+     * 输入: nums1 = [1,2,2,1], nums2 = [2,2]
+     * 输出: [2,2]
+     * 示例 2:
+     *
+     * 输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+     * 输出: [4,9]
+     * 说明：
+     *
+     * 输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。
+     * 我们可以不考虑输出结果的顺序。
+     * 进阶:
+     *
+     * 如果给定的数组已经排好序呢？你将如何优化你的算法？
+     * 如果 nums1 的大小比 nums2 小很多，哪种方法更优？
+     * 如果 nums2 的元素存储在磁盘上，磁盘内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/intersection-of-two-arrays-ii
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public static int[] intersect(int[] nums1, int[] nums2) {
+        if (nums1.length > nums2.length) {
+            return intersect(nums2, nums1);
+        }
+        HashMap<Integer,Integer> re =new HashMap<>();
+        for (int value : nums1) {
+            Integer v = re.getOrDefault(value, 0);
+            re.put(value, v + 1);
+        }
+        int[] intersection = new int[nums1.length];
+        int index = 0;
+        for (int num : nums2) {
+            int count = re.getOrDefault(num, 0);
+            if (count > 0) {
+                intersection[index++] = num;
+                count--;
+                if (count > 0) {
+                    re.put(num, count);
+                } else {
+                    re.remove(num);
+                }
+            }
+        }
+        return Arrays.copyOfRange(intersection, 0, index);
+
+    }
 
 }
 
