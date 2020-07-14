@@ -1,7 +1,9 @@
 import com.zhangxx.java8.leetcode.ListNode;
 import com.zhangxx.java8.leetcode.Solution1;
-
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class LeetCodeTest1 {
     //    @Test
@@ -97,6 +99,22 @@ public class LeetCodeTest1 {
 
 
         System.out.println(Solution1.intersect(a, b));
+
+
+    }
+
+    @Test
+    public void minimumTotal() {
+
+
+        List<Integer> b = Arrays.asList(2);
+
+        List<Integer> c = Arrays.asList(3, 4);
+        List<Integer> d = Arrays.asList(6, 5, 7);
+        List<Integer> e = Arrays.asList(4, 1, 8, 3);
+        List<List<Integer>> a = Arrays.asList(b, c, d, e);
+
+        System.out.println(Solution1.minimumTotal(a));
 
 
     }

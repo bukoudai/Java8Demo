@@ -1,8 +1,6 @@
 package com.zhangxx.java8.leetcode;
 
 
-import sun.reflect.generics.tree.Tree;
-
 import java.util.*;
 
 public class Solution1 {
@@ -274,7 +272,6 @@ public class Solution1 {
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-     * todo 超时了..
      *
      * @param nums
      * @return
@@ -309,9 +306,9 @@ public class Solution1 {
             re.add(0);
         }
 
-        TreeNode a=new TreeNode(nums[ nums.length-1]);
-        for (int i = nums.length-2; i >=0; i--) {
-            a=TreeNode.add(a,new TreeNode(nums[i]),re,i );
+        TreeNode a = new TreeNode(nums[nums.length - 1]);
+        for (int i = nums.length - 2; i >= 0; i--) {
+            a = TreeNode.add(a, new TreeNode(nums[i]), re, i);
         }
 
 
@@ -356,31 +353,28 @@ public class Solution1 {
         int h = dungeon.length, w = dungeon[0].length;
         int[][] dp = new int[h][w];
         //反向Dp
-        for (int i = h-1; i >= 0; i--) {
-            for (int j = w-1; j >= 0; j--) {
-                if(i==h-1&&j==w-1){
+        for (int i = h - 1; i >= 0; i--) {
+            for (int j = w - 1; j >= 0; j--) {
+                if (i == h - 1 && j == w - 1) {
                     //公主的位置
-                    dp[i][j]=1-dungeon[i][j];
+                    dp[i][j] = 1 - dungeon[i][j];
 
-                }else  if(i==h-1 ){
+                } else if (i == h - 1) {
                     //最下面一行只能是向右
-                    dp[i][j]= dp[i][j+1]-dungeon[i][j];
+                    dp[i][j] = dp[i][j + 1] - dungeon[i][j];
 
-                }else if(j==w-1 ){
+                } else if (j == w - 1) {
                     //最右边只能是向下
-                    dp[i][j]=dp[i+1][j]-dungeon[i][j];
-                }else {
+                    dp[i][j] = dp[i + 1][j] - dungeon[i][j];
+                } else {
                     //其他选择最小需要的血
-                    dp[i][j]=Math.min(dp[i][j+1]-dungeon[i][j] ,dp[i+1][j]-dungeon[i][j]);
+                    dp[i][j] = Math.min(dp[i][j + 1] - dungeon[i][j], dp[i + 1][j] - dungeon[i][j]);
                 }
-             //血量最少要为1
-                    dp[i][j]=Math.max(1, dp[i][j]);
-
-
+                //血量最少要为1
+                dp[i][j] = Math.max(1, dp[i][j]);
 
             }
         }
-
 
         return dp[0][0];
     }
@@ -388,26 +382,27 @@ public class Solution1 {
     /**
      * 给定两个数组，编写一个函数来计算它们的交集。
      * 示例 1:
-     *
+     * <p>
      * 输入: nums1 = [1,2,2,1], nums2 = [2,2]
      * 输出: [2,2]
      * 示例 2:
-     *
+     * <p>
      * 输入: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
      * 输出: [4,9]
      * 说明：
-     *
+     * <p>
      * 输出结果中每个元素出现的次数，应与元素在两个数组中出现的次数一致。
      * 我们可以不考虑输出结果的顺序。
      * 进阶:
-     *
+     * <p>
      * 如果给定的数组已经排好序呢？你将如何优化你的算法？
      * 如果 nums1 的大小比 nums2 小很多，哪种方法更优？
      * 如果 nums2 的元素存储在磁盘上，磁盘内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？
-     *
+     * <p>
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode-cn.com/problems/intersection-of-two-arrays-ii
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
      * @param nums1
      * @param nums2
      * @return
@@ -416,7 +411,7 @@ public class Solution1 {
         if (nums1.length > nums2.length) {
             return intersect(nums2, nums1);
         }
-        HashMap<Integer,Integer> re =new HashMap<>();
+        HashMap<Integer, Integer> re = new HashMap<>();
         for (int value : nums1) {
             Integer v = re.getOrDefault(value, 0);
             re.put(value, v + 1);
@@ -439,6 +434,68 @@ public class Solution1 {
 
     }
 
+    /**
+     * 给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。
+     * <p>
+     * 相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点。
+     * <p>
+     *  
+     * <p>
+     * 例如，给定三角形：
+     * <p>
+     * [
+     * [2],
+     * [3,4],
+     * [6,5,7],
+     * [4,1,8,3]
+     * ]
+     * 自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/triangle
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param triangle
+     * @return
+     */
+    public static int minimumTotal(List<List<Integer>> triangle) {
+
+        if (triangle.size() == 0) {
+            return 0;
+        }
+        if (triangle.size() == 1) {
+            return triangle.get(0).get(0);
+        }
+        int h = triangle.size();
+
+        int[][] dp = new int[h][];
+        for (int i = 0; i < dp.length; i++) {
+            dp[i] = new int[triangle.get(i).size()];
+        }
+
+
+        dp[0][0] = triangle.get(0).get(0);
+        int min = Integer.MAX_VALUE;
+        for (int i = 1; i < triangle.size(); i++) {
+            for (int j = 0; j < triangle.get(i).size(); j++) {
+
+                boolean a = j < triangle.get(i - 1).size();
+                boolean b = (0 <= (j - 1)) && ((j - 1) < triangle.get(i - 1).size());
+
+                if (a & b) {
+                    dp[i][j] = Math.min(dp[i - 1][j], dp[i - 1][j - 1]) + triangle.get(i).get(j);
+                } else if (a) {
+                    dp[i][j] = dp[i - 1][j] + triangle.get(i).get(j);
+                } else if (b) {
+                    dp[i][j] = dp[i - 1][j - 1] + triangle.get(i).get(j);
+                }
+                if (i == triangle.size() - 1) {
+                    min = Math.min(min, dp[i][j]);
+                }
+            }
+        }
+        return min;
+    }
 }
 
 
