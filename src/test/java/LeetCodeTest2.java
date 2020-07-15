@@ -34,5 +34,15 @@ public class LeetCodeTest2 {
 
     }
 
+    @Test
+    public void uniquePaths() {
+
+
+        System.out.println(Solution2.uniquePaths(1, 2));
+        System.out.println(Solution2.uniquePaths(3, 2));
+        System.out.println(Solution2.uniquePaths(7, 3));
+
+    }
+
 
 }

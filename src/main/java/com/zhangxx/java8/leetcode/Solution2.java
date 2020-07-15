@@ -108,6 +108,45 @@ public class Solution2 {
 
         return dp[0][0];
     }
+
+    /**
+     * 一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。
+     * <p>
+     * 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。
+     * <p>
+     * 问总共有多少条不同的路径？
+     * <p>
+     * <p>
+     * <p>
+     * 例如，上图是一个7 x 3 的网格。有多少可能的路径？
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/unique-paths
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param m
+     * @param n
+     * @return
+     */
+    public static int uniquePaths(int m, int n) {
+
+        int[][] dp = new int[m][n];
+
+        dp[m - 1][n - 1] = 1;
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+                //判断左和上是否有边界
+                if (j + 1 < n) {
+                    dp[i][j] = dp[i][j + 1];
+                }
+                if (i + 1 < m) {
+                    dp[i][j] = dp[i][j] + dp[i + 1][j];
+                }
+            }
+        }
+
+        return dp[0][0];
+    }
 }
 
 
