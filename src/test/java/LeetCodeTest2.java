@@ -44,5 +44,14 @@ public class LeetCodeTest2 {
 
     }
 
+    @Test
+    public void findMedianSortedArrays() {
+
+        int[] a = {1, 2};
+        int[] b = {3, 4};
+        System.out.println(Solution2.findMedianSortedArrays(a, b));
+
+    }
+
 
 }

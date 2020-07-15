@@ -11,12 +11,9 @@ public class SwingTest {
         JButton jButton= new JButton("My JButton");
 
 
-        /**
-         * Lambda (param1,param2)->{
-         *
-         * }
-         */
-        jButton.addActionListener(event -> {System.out.println("Button Pressed!");
+
+        jButton.addActionListener(event -> {
+            System.out.println("Button Pressed!");
             System.out.println("L");
             System.out.println("L");
             System.out.println("L");

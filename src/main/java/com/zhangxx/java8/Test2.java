@@ -2,6 +2,7 @@ package com.zhangxx.java8;
 @FunctionalInterface
 interface MyInteface {
     void test();
+    @Override
     String toString();
 }
 public class Test2{

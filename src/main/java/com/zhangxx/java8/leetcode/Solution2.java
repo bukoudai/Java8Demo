@@ -147,6 +147,71 @@ public class Solution2 {
 
         return dp[0][0];
     }
+
+    /**
+     * 4. 寻找两个正序数组的中位数
+     * 给定两个大小为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。
+     *
+     * 请你找出这两个正序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。
+     *
+     * 你可以假设 nums1 和 nums2 不会同时为空。
+     *
+     *
+     *
+     * 示例 1:
+     *
+     * nums1 = [1, 3]
+     * nums2 = [2]
+     *
+     * 则中位数是 2.0
+     * 示例 2:
+     *
+     * nums1 = [1, 2]
+     * nums2 = [3, 4]
+     *
+     * 则中位数是 (2 + 3)/2 = 2.5
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public static  double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int a=0;
+        int b=0;
+        int z =(nums1.length+nums2.length)/2;
+        int z2 =(nums1.length+nums2.length)%2;
+        boolean isEven =z2==0;
+        int[] all=new int[z+1];
+        for (int i = 0; i < all.length; i++) {
+            if(b==nums2.length){
+                all[i]=nums1[a];
+                a++;
+                continue;
+            }
+            if(a==nums1.length){
+                all[i]=nums2[b];
+                b++;
+                continue;
+            }
+            if (nums1[a]>=nums2[b]) {
+                all[i]=nums2[b];
+                b++;
+                continue;
+            }
+            if (nums1[a]<nums2[b]){
+                all[i]=nums1[a];
+                a++;
+                continue;
+            }
+        }
+
+        if(isEven){
+            return   ( all[all.length-1]+all[all.length-2])/2.0;
+
+        }else {
+            return   all[all.length-1];
+        }
+
+    }
 }
 
 
