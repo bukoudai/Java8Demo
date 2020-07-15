@@ -86,30 +86,23 @@ public class Solution2 {
 
         if (obstacleGrid[n - 1][m - 1] == 0) {
             dp[n - 1][m - 1] = 1;
-        } else {
-            dp[n - 1][m - 1] = 0;
         }
-
         for (int i = n - 1; i >= 0; i--) {
             for (int j = m - 1; j >= 0; j--) {
                 //判断左和上是否有障碍物或边界
-                if (i == (n - 1) && j == (m - 1)) {
+
+                if (obstacleGrid[i][j] == 1) {
                     continue;
                 }
-                //左             上
-                int z = 0;
+
                 if (j + 1 < m) {
-                    z = dp[i][j + 1];
+                    dp[i][j] = dp[i][j + 1];
                 }
-                int s = 0;
+
                 if (i + 1 < n) {
-                    s = dp[i + 1][j];
+                    dp[i][j] = dp[i][j] + dp[i + 1][j];
                 }
-                if (obstacleGrid[i][j] == 0) {
-                    dp[i][j] = s + z;
-                } else {
-                    dp[i][j] = 0;
-                }
+
             }
         }
 
