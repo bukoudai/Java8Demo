@@ -678,7 +678,6 @@ public class Solution2 {
 
         return true;
     }
-
     private static boolean dfs(int node, int c, int[][] graph, int[] color) {
 
         color[node] = c;
@@ -697,22 +696,6 @@ public class Solution2 {
         return true;
     }
 
-    private static boolean dfs(int[] color, int i, int rootColor) {
-
-
-        if (color[i] == UNCOLORED) {
-            if (rootColor == RED) {
-                color[i] = GREEN;
-            } else {
-                color[i] = RED;
-            }
-        } else if (color[i] == rootColor) {
-
-            return false;
-        }
-
-        return true;
-    }
 }
 
 
