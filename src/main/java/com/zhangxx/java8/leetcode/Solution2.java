@@ -2,8 +2,6 @@ package com.zhangxx.java8.leetcode;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Solution2 {
     /**
