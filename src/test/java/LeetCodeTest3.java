@@ -22,6 +22,36 @@ public class LeetCodeTest3 {
 
 
     }
+    @Test
+    public void findLength2() {
+
+
+        int[] c = {1,2,3,4,5,6,7,5,2};
+        int[] b = {2,2,3,4,5,2};
+        System.out.println(Solution3.findLength2(c,b));
+
+
+
+
+    }@Test
+    public void kthSmallest() {
+
+
+        int[] a = {1,2};
+        int[] b = {3,3};
+        int[] c = {12,13,15};
+
+        int[][] t = new int[2][2];
+        t[0] = a;
+        t[1] = b;
+//        t[2] = c;
+
+        System.out.println(Solution3.kthSmallest(t,3));
+
+
+
+
+    }
 
 
 
