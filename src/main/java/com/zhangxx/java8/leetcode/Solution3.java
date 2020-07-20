@@ -412,6 +412,63 @@ public class Solution3 {
 
         return ans;
     }
+
+
+    /**
+     *
+     * 97. 交错字符串
+     * 给定三个字符串 s1, s2, s3, 验证 s3 是否是由 s1 和 s2 交错组成的。
+     *
+     *  
+     *
+     * 示例 1：
+     *
+     * 输入：s1 = "aa bc c", s2 = "db bc a", s3 = "aa db bc bc ac"
+     * 输出：true
+     * 示例 2：
+     *
+     * 输入：s1 = "aa b c c", s2 = "db b ca", s3 = "aa db bb accc"
+     * 输出：false
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/interleaving-string
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     * @param s1
+     * @param s2
+     * @param s3
+     *
+     * @return
+     */
+    public static  boolean isInterleave(String s1, String s2, String s3) {
+        int length3 = s3.length();
+        int length1 = s2.length();
+        int length2 = s1.length();
+        if (length1+length2!= length3) {
+            return false;
+        }
+
+        boolean[][] dp = new boolean[length1 + 1][length2 + 1];
+
+        for (int i = 0; i < length1; i++) {
+
+            for (int j = 0; j < length2; j++) {
+                if (i == j && i == 0) {
+                    dp[i][j] = true;
+                    continue;
+                }
+                int p = i + j - 1;
+                if (i > 0) {
+                    dp[i][j] =   (dp[i - 1][j] && s1.charAt(i - 1) == s3.charAt(p));
+                }
+                if (j > 0) {
+                    dp[i][j] = dp[i][j] || (dp[i][j - 1] && s2.charAt(j - 1) == s3.charAt(p));
+                }
+            }
+
+        }
+
+        return  dp[length1][length2];
+    }
 }
 
 
