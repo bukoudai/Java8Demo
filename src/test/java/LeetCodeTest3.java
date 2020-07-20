@@ -37,8 +37,8 @@ public class LeetCodeTest3 {
     public void kthSmallest() {
 
 
-        int[] a = {1,2};
-        int[] b = {3,3};
+        int[] a = {1,4};
+        int[] b = {2,5};
         int[] c = {12,13,15};
 
         int[][] t = new int[2][2];
@@ -46,7 +46,7 @@ public class LeetCodeTest3 {
         t[1] = b;
 //        t[2] = c;
 
-        System.out.println(Solution3.kthSmallest(t,3));
+        System.out.println(Solution3.kthSmallest(t,2));
 
 
 

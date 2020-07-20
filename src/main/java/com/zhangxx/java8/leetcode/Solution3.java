@@ -331,65 +331,41 @@ public class Solution3 {
      * @param k
      * @return
      */
-    @Deprecated //todo 未完成
     public static int kthSmallest(int[][] matrix, int k) {
         // 二分查找
         // 0 1 2 3
         // 2 4 5 6
         // 3 5 6 7
-        if (k==1) {
-            return matrix[0][0];
-        }
         int n = matrix.length;
-        int count = 0;
-        int leftm=matrix[0][0];
-        int rightm=matrix[n - 1][n - 1];
-        int mid = (leftm + ((rightm - leftm) >>> 1));
-
-        while (matrix[0][0]<=mid&&mid<=matrix[n - 1][n - 1]) {
-            count = 0;
-            for (int i = 0; i < n; i++) {
-                int left = 0, right = n - 1, l=0;
-
-                while (left <= right) {
-                    int midIndex = ((right - left) >> 1) + left;
-
-                    if (mid < matrix[i][midIndex]) {
-                        right = midIndex - 1;
-                    } else {
-                        l=midIndex+1;
-                        left = midIndex + 1;
-                    }
-                }
-                count = count + l;
+        int left = matrix[0][0];
+        int right = matrix[n - 1][n - 1];
+        while (left < right) {
+            int mid = left + ((right - left) >> 1);
+            if (check(matrix, mid, k )) {
+                right = mid;
+            } else {
+                left = mid + 1;
             }
-
-            if (count > k) {
-                rightm = mid - 1;
-                mid--;
-            }
-            if (count < k) {
-                leftm = mid + 1;
-                mid++;
-            }
-            if(mid<leftm){
-                mid=leftm;
-                break;
-            }
-            if(mid>rightm){
-                mid=rightm;
-                break;
-            }
-
-            if (count == k) {
-                break;
-            }
-
         }
-
-
-        return mid;
+        return left;
     }
+
+    public static  boolean check(int[][] matrix, int mid, int k) {
+        int i = matrix.length - 1;
+        int j = 0;
+        int num = 0;
+        while (i >= 0 && j < matrix.length) {
+            if (matrix[i][j] <= mid) {
+                num += i + 1;
+                j++;
+            } else {
+                i--;
+            }
+        }
+        return num >= k;
+    }
+
+
 
     /**
      * 167. 两数之和 II - 输入有序数组
