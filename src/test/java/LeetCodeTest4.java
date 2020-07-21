@@ -8,8 +8,10 @@ public class LeetCodeTest4 {
 
 //        int[] c = {7,9,8,0,7,1,3,5,5,2,3,3};
         int[] c = {8,3,4,3,5,0,5,6,6,2,8,5,6,2,3,8,3,5,1,0,2};
+//        int[] c = {1,2, 3 };
 
-        System.out.println(Solution4.maxCoins(c));
+//        System.out.println(Solution4.maxCoins(c));
+        System.out.println(Solution4.maxCoins_dp(c));
 
 
 

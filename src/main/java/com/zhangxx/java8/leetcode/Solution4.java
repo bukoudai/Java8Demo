@@ -34,9 +34,9 @@ public class Solution4 {
      * 链接：https://leetcode-cn.com/problems/burst-balloons
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      * @param nums
-     * @return //todo 超时 待优化 TT
+     * @return
      */
-        static Map<String,Integer> maxCoins_map=new HashMap<>();
+    static Map<String,Integer> maxCoins_map=new HashMap<>();
     public static int maxCoins(int[] nums) {
         StringBuilder key =new StringBuilder();
         for (int i = 0; i < nums.length; i++) {
@@ -77,6 +77,49 @@ public class Solution4 {
 
         maxCoins_map.put(key.toString(),max);
         return max;
+    }
+
+    /**  戳气球 动态规划
+     * n=3
+     *    j 0 1 2 3 4
+     *  i   1 2 3 4 1
+     *  0 1 0 1 0 0 0  (0,3+1)  (0,2) (2,4)
+     *  1 2 0 0 0 0 0
+     *  2 3 0 0 0 0 0
+     *  3 4 0 0 0 0 0
+     *  4 1 0 0 0 0 0
+     *
+     *i< k < j
+     *dp[i][j]=max(dp[i][k]+dp[k][j]+v[i]*v[k]*v[j])
+     *
+     * @param nums
+     * @return
+     */
+    public static int maxCoins_dp(int[] nums) {
+        int n = nums.length;
+        int[] values=new int[n+2];
+        values[0]=1;
+        values[n+1]=1;
+        System.arraycopy(nums, 0, values, 1, values.length - 1 - 1);
+        int[][] dp = new int[n + 2][n + 2];
+            // l 区间宽度
+            for (int l = 2; l <n+2; l++) {
+                for (int left = 0; left+l <n+2; left++) {
+                    int right=left+l;
+                    for (int k = left + 1; k < right; k++) {
+                        // 择优做选择
+                        dp[left][right] = Math.max(
+                                dp[left][right],
+                                dp[left][k] + dp[k][right] + values[left]*values[right]*values[k]
+                        );
+                    }
+                }
+            }
+
+
+        return dp[0][n + 1];
+
+
     }
 
 
