@@ -15,5 +15,19 @@ public class LeetCodeTest4 {
 
 
 
+    }  @Test
+    public void generateTrees() {
+
+
+
+//        System.out.println(Solution4.generateTrees(1));
+        System.out.println(Solution4.generateTrees(2));
+//        System.out.println(Solution4.generateTrees(3));
+//        System.out.println(Solution4.generateTrees(4));
+
+
+
+
+
     }
 }
