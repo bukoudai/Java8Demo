@@ -241,4 +241,46 @@ public class Solution4 {
 
         return root;
     }
+
+
+    /**
+     *153. 寻找旋转排序数组中的最小值  剑指 Offer 11. 旋转数组的最小数字 154. 寻找旋转排序数组中的最小值 II
+     * 假设按照升序排序的数组在预先未知的某个点上进行了旋转。
+     *
+     * ( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。
+     *
+     * 请找出其中最小的元素。
+     *
+     * 你可以假设数组中不存在重复元素。
+     *
+     * 示例 1:
+     *
+     * 输入: [3,4,5,1,2]
+     * 输出: 1
+     * 示例 2:
+     *
+     * 输入: [4,5,6,7,0,1,2]
+     * 输出: 0
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     *
+     * 可用二分优化...
+     * @param nums
+     * @return
+     */
+    public static int findMin(int[] nums) {
+
+        int length = nums.length;
+
+        for (int i = 0; i < length-1; i++) {
+            if (nums[i]>nums[i+1]) {
+                return nums[i+1];
+            }
+        }
+        return nums[0];
+
+    }
 }
