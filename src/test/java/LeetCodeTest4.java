@@ -64,4 +64,17 @@ public class LeetCodeTest4 {
         System.out.println(Solution4.romanToInt2("MCMXCIV"));
 
     }
+
+    @Test
+    public void longestCommonPrefix() {
+
+        String[] a = {"MCMXCIV", "MCMXCIV"};
+        System.out.println(Solution4.longestCommonPrefix(a));
+
+
+    }
+
+
+
+
 }
