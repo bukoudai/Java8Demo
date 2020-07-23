@@ -28,22 +28,24 @@ public class LeetCodeTest4 {
 
 
     }
+
     @Test
     public void sortedArrayToBST() {
 
-        int[] a ={-10,-3,0,5,9};
+        int[] a = {-10, -3, 0, 5, 9};
 
         TreeNode treeNode = Solution4.sortedArrayToBST(a);
         System.out.println(treeNode);
 
     }
+
     @Test
     public void minPathSum() {
 
-        int[] a ={1,3,1};
+        int[] a = {1, 3, 1};
 
-        int[] b = {1,5,1};
-        int[] c = {4,2,1};
+        int[] b = {1, 5, 1};
+        int[] c = {4, 2, 1};
 
 
         int[][] t = new int[3][3];
@@ -51,6 +53,15 @@ public class LeetCodeTest4 {
         t[1] = b;
         t[2] = c;
         System.out.println(Solution4.minPathSum(t));
+
+    }
+
+    @Test
+    public void romanToInt() {
+
+
+        System.out.println(Solution4.romanToInt("MCMXCIV"));
+        System.out.println(Solution4.romanToInt2("MCMXCIV"));
 
     }
 }
