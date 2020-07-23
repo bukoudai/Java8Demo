@@ -74,6 +74,22 @@ public class LeetCodeTest4 {
 
     }
 
+    @Test
+    public void isValid() {
+
+
+        System.out.println(Solution4.isValid("()[]{}") == true);
+        System.out.println(Solution4.isValid("()") == true);
+        System.out.println(Solution4.isValid("(]") == false);
+        System.out.println(Solution4.isValid("([)]") == false);
+        System.out.println(Solution4.isValid("{[]}") == true);
+        System.out.println(Solution4.isValid("}}") == false);
+        System.out.println(Solution4.isValid("((") == false);
+        System.out.println(Solution4.isValid("(()(") == false);
+
+
+    }
+
 
 
 
