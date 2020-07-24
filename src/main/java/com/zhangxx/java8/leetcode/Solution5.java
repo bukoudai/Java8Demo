@@ -249,13 +249,12 @@ public class Solution5 {
      * @return
      */
     public static int threeSumClosest(int[] nums, int target) {
-        int ans = 0;
+        int ans = nums[0] + nums[1] + nums[2];
         if (nums.length == 3) {
-            return 0;
-
+            return ans;
         }
         Arrays.sort(nums);
-        boolean frist = true;
+
         for (int k = 0; k < nums.length - 2; k++) {
             if ((k - 1 >= 0) && (nums[k] == nums[k - 1])) {
                 continue;
@@ -280,14 +279,9 @@ public class Solution5 {
                 } else if (i > target) {
                     right--;
                 } else {
-
-                    left++;
-                    right--;
+                    return target;
                 }
-                if (frist) {
-                    ans = i;
-                    frist = false;
-                } else if (Math.abs(target - i) <= Math.abs(target - ans)) {
+                if (Math.abs(target - i) <= Math.abs(target - ans)) {
                     ans = i;
                 }
 
