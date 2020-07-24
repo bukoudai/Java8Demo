@@ -43,4 +43,18 @@ public class LeetCodeTest5 {
 
 
     }
+
+    @Test
+    public void fourSum() {
+        int[] a = {-1, 2, 1, -4};
+        int[] b = {1, 0, -1, 0, -2, 2};
+        int[] c = {0, 0, 0, 0};
+
+
+//        System.out.println(Solution5.threeSumClosest(a,1));
+//        System.out.println(Solution5.fourSum(b, 0));
+        System.out.println(Solution5.fourSum(c, 0));
+
+
+    }
 }

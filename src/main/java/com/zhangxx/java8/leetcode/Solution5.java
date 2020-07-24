@@ -326,4 +326,103 @@ public class Solution5 {
         }
         throw new IllegalArgumentException("No two sum solution");
     }
+
+    /**
+     * 18. 四数之和
+     * 给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。
+     * <p>
+     * 注意：
+     * <p>
+     * 答案中不可以包含重复的四元组。
+     * <p>
+     * 示例：
+     * <p>
+     * 给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target = 0。
+     * <p>
+     * 满足要求的四元组集合为：
+     * [
+     * [-1,  0, 0, 1],
+     * [-2, -1, 1, 2],
+     * [-2,  0, 0, 2]
+     * ]
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/4sum
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public static List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        if (nums.length < 4) {
+            return ans;
+
+        }
+        Arrays.sort(nums);
+
+        int minValue = nums[0] + nums[1] + nums[2] + nums[3];
+        int maxValue = nums[nums.length - 1] + nums[nums.length - 2] + nums[nums.length - 3] + nums[nums.length - 4];
+        //target是否在最大最小区间内
+        if (minValue > target || maxValue < target) {
+            return ans;
+        }
+        for (int p = 0; p < nums.length - 3; p++) {
+            if ((p > 0) && (nums[p] == nums[p - 1])) {
+                continue;
+            }
+            //target是否在最大最小区间内
+            minValue = nums[p] + nums[p + 1] + nums[p + 2] + nums[p + 3];
+
+            if (minValue > target) {
+                continue;
+            }
+            for (int k = p + 1; k < nums.length - 2; k++) {
+
+                if ((k > p + 1) && (nums[k] == nums[k - 1])) {
+                    continue;
+                }
+                int left = k + 1;
+                int right = nums.length - 1;
+
+                minValue = nums[p] + nums[k] + nums[left] + nums[left + 1];
+                maxValue = nums[p] + nums[k] + nums[right - 1] + nums[right];
+                //target是否在最大最小区间内
+                if (minValue > target || maxValue < target) {
+                    continue;
+                }
+
+                while (left < right) {
+                    if ((left - 1) > k && nums[left - 1] == nums[left]) {
+                        left++;
+                        continue;
+                    }
+                    if ((right + 1) < (nums.length - 1) && nums[right + 1] == nums[right]) {
+                        right--;
+                        continue;
+                    }
+
+                    int i = nums[p] + nums[k] + nums[right] + nums[left];
+
+                    if (i < target) {
+                        left++;
+                    } else if (i > target) {
+                        right--;
+                    } else {
+                        List<Integer> list = Arrays.asList(nums[p], nums[k], nums[left], nums[right]);
+                        ans.add(list);
+                        left++;
+                        right--;
+                    }
+
+
+                }
+
+            }
+        }
+
+
+        return ans;
+    }
 }
