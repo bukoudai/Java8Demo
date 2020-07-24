@@ -57,4 +57,13 @@ public class LeetCodeTest5 {
 
 
     }
+
+    @Test
+    public void intToRoman() {
+
+        System.out.println(Solution5.intToRoman(1993));
+        System.out.println(Solution5.intToRoman(58));
+
+
+    }
 }
