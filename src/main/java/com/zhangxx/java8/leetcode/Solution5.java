@@ -568,4 +568,166 @@ public class Solution5 {
 
         return false;
     }
+
+
+    /**
+     * 17. 电话号码的字母组合
+     * 给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
+     * <p>
+     * 给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+     * <p>
+     * <p>
+     * <p>
+     * 示例:
+     * <p>
+     * 输入："23"
+     * 输出：["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+     * 说明:
+     * 尽管上面的答案是按字典序排列的，但是你可以任意选择答案输出的顺序。
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param digits
+     * @return
+     */
+    public static List<String> letterCombinations(String digits) {
+
+        List<String> re = new LinkedList<>();
+
+        for (int i = 0; i < digits.length(); i++) {
+            re = letterCombinations(digits, i, re);
+        }
+
+
+        return re;
+    }
+
+
+    public static List<String> letterCombinations(String digits, int index, List<String> list) {
+
+
+        List<String> re = new LinkedList<>();
+        switch (digits.charAt(index)) {
+            case '2':
+
+                if (list.size() == 0) {
+                    re.add("a");
+                    re.add("b");
+                    re.add("c");
+                } else {
+                    for (String s : list) {
+                        re.add(s + "a");
+                        re.add(s + "b");
+                        re.add(s + "c");
+                    }
+                }
+                break;
+            case '3':
+                if (list.size() == 0) {
+                    re.add("d");
+                    re.add("e");
+                    re.add("f");
+                } else {
+                    for (String s : list) {
+                        re.add(s + "d");
+                        re.add(s + "e");
+                        re.add(s + "f");
+                    }
+                }
+                break;
+            case '4':
+                if (list.size() == 0) {
+                    re.add("g");
+                    re.add("h");
+                    re.add("i");
+                } else {
+                    for (String s : list) {
+                        re.add(s + "g");
+                        re.add(s + "h");
+                        re.add(s + "i");
+                    }
+                }
+                break;
+
+
+            case '5':
+
+                if (list.size() == 0) {
+                    re.add("j");
+                    re.add("k");
+                    re.add("l");
+                } else {
+                    for (String s : list) {
+                        re.add(s + "j");
+                        re.add(s + "k");
+                        re.add(s + "l");
+                    }
+                }
+                break;
+            case '6':
+                if (list.size() == 0) {
+                    re.add("m");
+                    re.add("n");
+                    re.add("o");
+                } else {
+                    for (String s : list) {
+                        re.add(s + "m");
+                        re.add(s + "n");
+                        re.add(s + "o");
+                    }
+                }
+                break;
+            case '7':
+                if (list.size() == 0) {
+                    re.add("p");
+                    re.add("q");
+                    re.add("r");
+                    re.add("s");
+                } else {
+                    for (String s : list) {
+                        re.add(s + "p");
+                        re.add(s + "q");
+                        re.add(s + "r");
+                        re.add(s + "s");
+                    }
+                }
+                break;
+            case '8':
+                if (list.size() == 0) {
+                    re.add("t");
+                    re.add("u");
+                    re.add("v");
+                } else {
+                    for (String s : list) {
+                        re.add(s + "t");
+                        re.add(s + "u");
+                        re.add(s + "v");
+                    }
+                }
+                break;
+            case '9':
+
+                if (list.size() == 0) {
+                    re.add("w");
+                    re.add("x");
+                    re.add("y");
+                    re.add("z");
+                } else {
+                    for (String s : list) {
+                        re.add(s + "w");
+                        re.add(s + "x");
+                        re.add(s + "y");
+                        re.add(s + "z");
+                    }
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        return re;
+    }
 }

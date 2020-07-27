@@ -66,4 +66,13 @@ public class LeetCodeTest5 {
 
 
     }
+
+    @Test
+    public void letterCombinations() {
+
+        System.out.println(Solution5.letterCombinations("23"));
+        System.out.println(Solution5.letterCombinations("58"));
+
+
+    }
 }
