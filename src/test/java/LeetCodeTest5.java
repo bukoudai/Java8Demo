@@ -1,3 +1,4 @@
+import com.zhangxx.java8.leetcode.ListNode;
 import com.zhangxx.java8.leetcode.Solution5;
 import org.junit.Test;
 
@@ -72,6 +73,32 @@ public class LeetCodeTest5 {
 
         System.out.println(Solution5.letterCombinations("23"));
         System.out.println(Solution5.letterCombinations("58"));
+
+
+    }
+
+    @Test
+    public void removeNthFromEnd() {
+
+
+        ListNode head = new ListNode(1);
+//        head.next=new ListNode(2);
+//        head.next.next= new ListNode(3);
+//        head.next.next.next= new ListNode(4);
+//        head.next.next.next.next= new ListNode(5);
+
+        System.out.println(Solution5.removeNthFromEnd2(head, 1));
+
+        ListNode head2 = new ListNode(1);
+        head2.next = new ListNode(2);
+        head2.next.next = new ListNode(3);
+        System.out.println(Solution5.removeNthFromEnd2(head2, 2));
+
+        ListNode head3 = new ListNode(1);
+        head3.next = new ListNode(2);
+
+
+        System.out.println(Solution5.removeNthFromEnd2(head3, 2));
 
 
     }

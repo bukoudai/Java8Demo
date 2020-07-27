@@ -730,4 +730,94 @@ public class Solution5 {
 
         return re;
     }
+
+    /**
+     * 19.删除链表的倒数第N个节点
+     * 给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+     * <p>
+     * 示例：
+     * <p>
+     * 给定一个链表: 1->2->3->4->5, 和 n = 2.
+     * <p>
+     * 当删除了倒数第二个节点后，链表变为 1->2->3->5.
+     * 说明：
+     * <p>
+     * 给定的 n 保证是有效的。
+     * <p>
+     * 进阶：
+     * <p>
+     * 你能尝试使用一趟扫描实现吗？
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param head
+     * @param n
+     * @return
+     */
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        // 用一个数组储存  感觉很蠢
+        int size = 1;
+        ListNode next = head.next;
+
+        List<ListNode> list = new ArrayList<>();
+        list.add(head);
+        while (next != null) {
+
+            list.add(next);
+            next = next.next;
+            size++;
+        }
+        n = size - n;
+
+
+        if (n == 0) {
+            if (list.size() > 2) {
+                return list.get(1);
+
+            }
+            return null;
+        }
+        if (n != 1) {
+            ListNode listNode = list.get(n - 1);
+            if (n + 1 < list.size()) {
+                listNode.next = list.get(n + 1);
+            } else {
+                listNode.next = null;
+            }
+
+        } else {
+            ListNode listNode = list.get(n - 1);
+            listNode.next = null;
+        }
+
+        return head;
+    }
+
+    /**
+     * n=2
+     * 1 -> 2  -> 3-> 4-> 5
+     */
+    public static ListNode removeNthFromEnd2(ListNode head, int n) {
+        //双指针法
+
+        ListNode pre = new ListNode(0);
+        pre.next = head;
+        ListNode right = pre, left = pre;
+        while (n != 0) {
+            right = right.next;
+            n--;
+        }
+        //确定宽度 再步进
+        while (right.next != null) {
+            right = right.next;
+            left = left.next;
+        }
+        //删除结点
+        left.next = left.next.next;
+        //返回头节点
+        return pre.next;
+
+    }
 }
