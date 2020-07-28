@@ -46,4 +46,15 @@ public class LeetCodeTest6 {
 
 
     }
+
+    @Test
+    public void strStr() {
+
+
+        System.out.println(Solution6.strStr("a", "a"));
+        System.out.println(Solution6.strStr("hello", "ll"));
+        System.out.println(Solution6.strStr("aaaaa", "bba"));
+
+
+    }
 }
