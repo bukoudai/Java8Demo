@@ -22,4 +22,14 @@ public class LeetCodeTest6 {
 
 
     }
+
+    @Test
+    public void removeElement() {
+
+        int[] a = {0, 1, 2, 2, 3, 0, 4, 2};
+
+        System.out.println(Solution6.removeElement(a, 0));
+
+
+    }
 }
