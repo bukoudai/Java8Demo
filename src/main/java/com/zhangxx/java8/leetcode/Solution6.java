@@ -350,4 +350,58 @@ public class Solution6 {
 
         return ans == (int) ans ? (int) ans : Integer.MAX_VALUE;
     }
+
+    /**
+     * 31. 下一个排列
+     * 实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。
+     * (123  获取用123组合 比123更大的第一个数字  如果没有返回组合的最小数字)
+     * 如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。
+     * <p>
+     * 必须原地修改，只允许使用额外常数空间。
+     * <p>
+     * 以下是一些例子，输入位于左侧列，其相应输出位于右侧列。
+     * 1,2,3 → 1,3,2
+     * 3,2,1 → 1,2,3
+     * 1,1,5 → 1,5,1
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/next-permutation
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param nums
+     */
+    public static void nextPermutation(int[] nums) {
+        int temp;
+
+        for (int i = nums.length - 1; i >= 0; i--) {
+            int min = Integer.MAX_VALUE;
+            int minIndex = -1;
+            for (int j = i; j < nums.length; j++) {
+                if (nums[i] < nums[j]) {
+                    if (min > nums[j]) {
+                        min = nums[j];
+                        minIndex = j;
+                    }
+                }
+            }
+            if (minIndex != -1) {
+                temp = nums[i];
+                nums[i] = nums[minIndex];
+                nums[minIndex] = temp;
+                for (int k = i + 1, j = nums.length - 1; k < j; k++, j--) {
+                    temp = nums[k];
+                    nums[k] = nums[j];
+                    nums[j] = temp;
+                }
+                return;
+            }
+
+        }
+        for (int i = 0, j = nums.length - 1; i < j; i++, j--) {
+            temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+        }
+
+    }
 }
