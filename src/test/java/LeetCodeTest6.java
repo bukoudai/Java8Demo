@@ -90,4 +90,14 @@ public class LeetCodeTest6 {
 
 
     }
+
+    @Test
+    public void longestValidParentheses() {
+
+        System.out.println(Solution6.longestValidParentheses(")())"));
+        System.out.println(Solution6.longestValidParentheses(")()())"));
+        System.out.println(Solution6.longestValidParentheses("()(())"));
+
+
+    }
 }

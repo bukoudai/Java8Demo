@@ -404,4 +404,142 @@ public class Solution6 {
         }
 
     }
+
+    /**
+     * 32. 最长有效括号
+     * 给定一个只包含 '(' 和 ')' 的字符串，找出最长的包含有效括号的子串的长度。
+     * <p>
+     * 示例 1:
+     * <p>
+     * 输入: "(()"
+     * 输出: 2
+     * 解释: 最长有效括号子串为 "()"
+     * 示例 2:
+     * <p>
+     * 输入: ")()())"
+     * 输出: 4
+     * 解释: 最长有效括号子串为 "()()"
+     * ")(()())"
+     * <p>
+     * ( ) ( ( ) )
+     * 0 1 2 3 4 5
+     * 0 2 0 0 2 4
+     * 0 2 0 0 2 4
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/longest-valid-parentheses
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param s
+     * @return
+     */
+    public static int longestValidParentheses(String s) {
+        int max = 0;
+        int length = s.length();
+        int[] dp = new int[length];
+
+        for (int i = 1; i < length; i++) {
+            char c = s.charAt(i);
+            if (c == ')') {
+                if (dp[i - 1] != 0) {
+                    if (i - dp[i - 1] > 0) {
+                        if (s.charAt(i - dp[i - 1] - 1) == '(') {
+                            dp[i] = dp[i - 1] + 2;
+                            if (i - dp[i - 1] - 1 > 0) {
+                                dp[i] = dp[i] + dp[i - dp[i - 1] - 2];
+                            }
+                        }
+                    }
+                } else {
+                    if (s.charAt(i - 1) == '(') {
+                        if (i > 1) {
+                            dp[i] = dp[i - 2] + 2;
+                        } else {
+                            dp[i] = 2;
+                        }
+
+                    }
+
+                }
+            }
+            max = Math.max(dp[i], max);
+
+        }
+
+
+        return max;
+    }
+
+    /**
+     * 暴力 超时...
+     *
+     * @param s
+     * @return
+     */
+    public static int longestValidParentheses2(String s) {
+
+        if (s.length() < 2) {
+            return 0;
+        }
+        int max = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int length = s.length() - i;
+            if (max < (length)) {
+                for (int j = 0; j <= s.length() - length; j++) {
+                    if (isValid(s, j, length)) {
+                        max = length;
+                        break;
+                    }
+                }
+            }
+
+
+        }
+
+
+        return max;
+    }
+
+
+    public static boolean isValid(String s, int start, int length) {
+
+        if (length == 0) {
+            return true;
+        } else {
+            if (length % 2 != 0) {
+                return false;
+            }
+        }
+        char[] stack = new char[length / 2];
+        int index = 0;
+        for (int i = start; i < start + length; i++) {
+            char c = s.charAt(i);
+            boolean add = false;
+            if (c == '(') {
+                add = true;
+            }
+            if (add) {
+                if (index >= stack.length) {
+                    return false;
+                }
+                stack[index] = c;
+                index++;
+            } else {
+                if (index <= 0) {
+                    return false;
+                }
+                index--;
+
+                if (c == ')') {
+                    if (stack[index] != '(') {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+
+            }
+        }
+        return index == 0;
+    }
 }
