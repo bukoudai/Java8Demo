@@ -57,4 +57,16 @@ public class LeetCodeTest6 {
 
 
     }
+
+    @Test
+    public void divide() {
+
+
+        System.out.println(Solution6.divide(10, 3));
+        System.out.println(Solution6.divide(7, -3));
+        System.out.println(Solution6.divide(-2147483648, -1));
+        System.out.println(Solution6.divide(-2147483648, 1));
+
+
+    }
 }
