@@ -1,6 +1,8 @@
 import com.zhangxx.java8.leetcode.Solution7;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class LeetCodeTest7 {
 
     @Test
@@ -21,6 +23,19 @@ public class LeetCodeTest7 {
         System.out.println(Solution7.search(e, 6));
         System.out.println(Solution7.search(f, 1));
         System.out.println(Solution7.search(g, 2));
+
+
+    }
+
+    @Test
+    public void searchRange() {
+        int[] a = new int[]{5, 7, 7, 8, 8, 10};
+        int[] b = new int[]{};
+        int[] c = new int[]{2, 2};
+
+//        System.out.println(Arrays.toString(Solution7.searchRange(a,  10)));
+//        System.out.println(Arrays.toString(Solution7.searchRange(b,  1)));
+        System.out.println(Arrays.toString(Solution7.searchRange(c, 2)));
 
 
     }
