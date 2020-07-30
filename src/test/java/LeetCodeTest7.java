@@ -39,4 +39,50 @@ public class LeetCodeTest7 {
 
 
     }
+
+    @Test
+    public void isValidSudoku() {
+        char[] t1 = {'5', '3', '.', '.', '7', '.', '.', '.', '.'};
+        char[] t2 = {'6', '.', '.', '1', '9', '5', '.', '.', '.'};
+        char[] t3 = {'.', '9', '8', '.', '.', '.', '.', '6', '.'};
+        char[] t4 = {'8', '.', '.', '.', '6', '.', '.', '.', '3'};
+        char[] t5 = {'4', '.', '.', '8', '.', '3', '.', '.', '1'};
+        char[] t6 = {'7', '.', '.', '.', '2', '.', '.', '.', '6'};
+        char[] t7 = {'.', '6', '.', '.', '.', '.', '2', '8', '.'};
+        char[] t8 = {'.', '.', '.', '4', '1', '9', '.', '.', '5'};
+        char[] t9 = {'.', '.', '.', '.', '8', '.', '.', '7', '9'};
+        char[][] t = new char[9][9];
+        t[0] = t1;
+        t[1] = t2;
+        t[2] = t3;
+        t[3] = t4;
+        t[4] = t5;
+        t[5] = t6;
+        t[6] = t7;
+        t[7] = t8;
+        t[8] = t9;
+
+        long l = System.nanoTime();
+
+        for (int i = 0; i < 100; i++) {
+            l = System.nanoTime();
+            System.out.println(Solution7.isValidSudoku(t));
+            l = System.nanoTime() - l;
+            System.out.print("数组: ");
+            System.out.println(l);
+        }
+
+        for (int i = 0; i < 100; i++) {
+            l = System.nanoTime();
+            System.out.println(Solution7.isValidSudoku2(t));
+            l = System.nanoTime() - l;
+            System.out.print("hash: ");
+            System.out.println(l);
+        }
+
+//        char[] t10 = {'1','2','3','4','5','6','7','8','9'};
+//        for (int i = 0; i < t10.length; i++) {
+//            System.out.println(t10[i]%9);
+//        }
+    }
 }
