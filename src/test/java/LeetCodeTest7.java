@@ -85,4 +85,12 @@ public class LeetCodeTest7 {
 //            System.out.println(t10[i]%9);
 //        }
     }
+
+    @Test
+    public void countAndSay() {
+
+        System.out.println(Solution7.countAndSay(6));
+
+
+    }
 }
