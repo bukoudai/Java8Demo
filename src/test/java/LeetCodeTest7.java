@@ -93,4 +93,17 @@ public class LeetCodeTest7 {
 
 
     }
+
+    @Test
+    public void firstMissingPositive() {
+        int[] a = new int[]{7, 8, 9, 11, 12};
+        int[] b = new int[]{1, 2, 0};
+        int[] c = new int[]{3, 4, -1, 1};
+
+
+//        System.out.println( Solution7.firstMissingPositive(a));
+        System.out.println(Solution7.firstMissingPositive(b));
+
+
+    }
 }
