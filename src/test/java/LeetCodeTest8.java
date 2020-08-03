@@ -36,4 +36,13 @@ public class LeetCodeTest8 {
 
 
     }
+
+    @Test
+    public void multiply() {
+
+
+        System.out.println(Solution8.multiply("99", "999"));
+
+
+    }
 }

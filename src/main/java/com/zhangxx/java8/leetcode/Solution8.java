@@ -189,4 +189,70 @@ public class Solution8 {
 
 
     }
+
+    /**
+     * 43. 字符串相乘
+     * 给定两个以字符串形式表示的非负整数 num1 和 num2，返回 num1 和 num2 的乘积，它们的乘积也表示为字符串形式。
+     * <p>
+     * 示例 1:
+     * <p>
+     * 输入: num1 = "2", num2 = "3"
+     * 输出: "6"
+     * 示例 2:
+     * <p>
+     * 输入: num1 = "123", num2 = "456"
+     * 输出: "56088"
+     * 说明：
+     * <p>
+     * num1 和 num2 的长度小于110。
+     * num1 和 num2 只包含数字 0-9。
+     * num1 和 num2 均不以零开头，除非是数字 0 本身。
+     * 不能使用任何标准库的大数类型（比如 BigInteger）或直接将输入转换为整数来处理。
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/multiply-strings
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param num1
+     * @param num2
+     * @return
+     */
+    public static String multiply(String num1, String num2) {
+        if (num1.length() == 0 || num2.length() == 0) {
+            return "";
+        }
+        if ("0".equals(num1) || "0".equals(num2)) {
+            return "0";
+        }
+        char[] n1 = num1.toCharArray();
+        char[] n2 = num2.toCharArray();
+        char[] ans = new char[n1.length + n2.length];
+        int start = ans.length - 1;
+        for (int i = n1.length - 1; i >= 0; i--) {
+            int d = n1[i] - '0', k = start;
+            for (int j = n2.length - 1; j >= 0; j--) {
+                ans[k--] += (n2[j] - '0') * d;
+            }
+            start--;
+        }
+        int rem = 0;
+        for (int i = ans.length - 1; i >= 0; i--) {
+            ans[i] += rem;
+            rem = ans[i] / 10;
+            ans[i] = (char) (ans[i] % 10);
+        }
+
+        int i = 0;
+        while (ans[i] == 0) {
+            i++;
+        }
+        start = i;
+        while (i < ans.length) {
+            ans[i] = (char) (ans[i] + 48);
+            i++;
+        }
+
+        return new String(ans, start, ans.length - start);
+
+    }
 }
