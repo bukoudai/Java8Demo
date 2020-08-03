@@ -27,4 +27,13 @@ public class LeetCodeTest8 {
 
 
     }
+
+    @Test
+    public void addStrings() {
+
+
+        System.out.println(Solution8.addStrings("123456789", "987654321"));
+
+
+    }
 }
