@@ -398,4 +398,153 @@ public class Solution8 {
 
         }
     }
+
+    /***
+     * 53. 最大子序和
+     * 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+     *
+     * 示例:
+     *
+     * 输入: [-2,1,-3,4,-1,2,1,-5,4]
+     * 输出: 6
+     * 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6。
+     * 进阶:
+     *
+     * 如果你已经实现复杂度为 O(n) 的解法，尝试使用更为精妙的分治法求解。
+     *
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/maximum-subarray
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     * @param nums
+     * @return
+     */
+    public static int maxSubArray(int[] nums) {
+        if (nums.length == 1) {
+            return nums[0];
+
+        }
+        int pre = 0, maxAns = nums[0];
+        for (int num : nums) {
+            pre = Math.max(pre + num, num);
+            maxAns = Math.max(maxAns, pre);
+        }
+        return maxAns;
+
+
+    }
+
+    public int maxSubArray2(int[] nums) {
+        //暴力算法 超时
+        if (nums.length == 1) {
+            return nums[0];
+
+        }
+        int ans = nums[0];
+
+        for (int i = nums.length; i > 0; i--) {
+
+            for (int j = 0; j <= nums.length - i; j++) {
+                int sum = nums[j];
+                for (int k = j + 1; k < j + i; k++) {
+                    sum = sum + nums[k];
+                }
+                ans = Math.max(sum, ans);
+            }
+
+        }
+
+        return ans;
+
+    }
+
+    /**
+     * 67. 二进制求和
+     * 给你两个二进制字符串，返回它们的和（用二进制表示）。
+     * <p>
+     * 输入为 非空 字符串且只包含数字 1 和 0。
+     * <p>
+     *  
+     * <p>
+     * 示例 1:
+     * <p>
+     * 输入: a = "11", b = "1"
+     * 输出: "100"
+     * 示例 2:
+     * <p>
+     * 输入: a = "1010", b = "1011"
+     * 输出: "10101"
+     *  
+     * <p>
+     * 提示：
+     * <p>
+     * 每个字符串仅由字符 '0' 或 '1' 组成。
+     * 1 <= a.length, b.length <= 10^4
+     * 字符串如果不是 "0" ，就都不含前导零。
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/add-binary
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+    public static String addBinary(String a, String b) {
+        return addStrNum(a, b, 2);
+
+    }
+
+    /**
+     * 两数相加
+     *
+     * @param a
+     * @param b
+     * @param base 进制
+     * @return
+     */
+    public static String addStrNum(String a, String b, int base) {
+        if (a.length() == 0) {
+            return b;
+        }
+        if (b.length() == 0) {
+            return a;
+        }
+        if (a.length() < b.length()) {
+            return addStrNum(b, a, base);
+        }
+        int temp = 0;
+        int count = 1;
+        char[] ans = new char[a.length() + 1];
+        for (int i = 0; i < a.length(); i++) {
+            //从第一位算起
+            int c = (a.charAt(a.length() - 1 - i) - 48);
+            int sum;
+            //如果b长度不够
+            if ((b.length() - i) > 0) {
+                int d = (b.charAt(b.length() - 1 - i) - 48);
+                sum = c + d + temp;
+            } else {
+                sum = c + temp;
+            }
+
+            if (sum - base == 0) {
+                ans[ans.length - count] = '0';
+                temp = 1;
+            } else if (sum - base > 0) {
+                ans[ans.length - count] = (char) (sum - base + 48);
+                temp = 1;
+            } else {
+                ans[ans.length - count] = (char) (sum + 48);
+                temp = 0;
+            }
+            count++;
+        }
+        if (temp > 0) {
+            ans[0] = (char) (temp + 48);
+            return new String(ans);
+        } else {
+            return new String(ans, 1, ans.length - 1);
+        }
+
+    }
 }
