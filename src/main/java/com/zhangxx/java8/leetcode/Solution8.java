@@ -1,6 +1,9 @@
 package com.zhangxx.java8.leetcode;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Solution8 {
     /**
@@ -254,5 +257,145 @@ public class Solution8 {
 
         return new String(ans, start, ans.length - start);
 
+    }
+
+    /**
+     * 207. 课程表
+     * 你这个学期必须选修 numCourse 门课程，记为 0 到 numCourse-1 。
+     * <p>
+     * 在选修某些课程之前需要一些先修课程。 例如，想要学习课程 0 ，你需要先完成课程 1 ，我们用一个匹配来表示他们：[0,1]
+     * <p>
+     * 给定课程总量以及它们的先决条件，请你判断是否可能完成所有课程的学习？
+     * <p>
+     *  
+     * <p>
+     * 示例 1:
+     * <p>
+     * 输入: 2, [[1,0]]
+     * 输出: true
+     * 解释: 总共有 2 门课程。学习课程 1 之前，你需要完成课程 0。所以这是可能的。
+     * 示例 2:
+     * <p>
+     * 输入: 2, [[1,0],[0,1]]
+     * 输出: false
+     * 解释: 总共有 2 门课程。学习课程 1 之前，你需要先完成​课程 0；并且学习课程 0 之前，你还应先完成课程 1。这是不可能的。
+     *  
+     * <p>
+     * 提示：
+     * <p>
+     * 输入的先决条件是由 边缘列表 表示的图形，而不是 邻接矩阵 。详情请参见图的表示法。
+     * 你可以假定输入的先决条件中没有重复的边。
+     * 1 <= numCourses <= 10^5
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/course-schedule
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param numCourses
+     * @param prerequisites
+     * @return
+     */
+
+    public static boolean canFinish(int numCourses, int[][] prerequisites) {
+        //DFS
+        if (prerequisites.length == 0 || ((prerequisites.length == 1) && (prerequisites[0].length == 0))) {
+            return true;
+        }
+        //准备数据
+        int learnCount = 0;
+
+        //节点状态 1 可以学习  0 未遍历  2正在遍历 3 死循环
+        int[] status = new int[numCourses];
+        //保存节点链接的下一个节点的集合
+        HashMap<Integer, List<Integer>> nodes = new HashMap<>();
+        for (int[] prerequisite : prerequisites) {
+            int pre = prerequisite[0];
+            if (nodes.get(pre) == null) {
+                nodes.put(pre, new LinkedList<>());
+            }
+            nodes.get(pre).add(prerequisite[1]);
+        }
+
+        //遍历每个节点
+
+        for (int i = 0; i < numCourses; i++) {
+            if (status[i] == 0) {
+                //深度遍历
+                dfs(nodes, i, status);
+            }
+        }
+        for (int value : status) {
+            if (value == 1) {
+                learnCount++;
+            }
+        }
+        return learnCount >= numCourses;
+    }
+
+    public static boolean dfs(HashMap<Integer, List<Integer>> nodes, int index, int[] status) {
+        if (status[index] == 0) {
+            status[index] = 2;
+            if (nodes.get(index) == null) {
+                status[index] = 1;
+                return true;
+            }
+            for (int i1 = 0, l = nodes.get(index).size(); i1 < l; i1++) {
+                if (!dfs(nodes, nodes.get(index).get(i1), status)) {
+                    status[index] = 3;
+                    return false;
+                }
+            }
+            status[index] = 1;
+            return true;
+        }
+        return status[index] == 1;
+    }
+
+    public static boolean canFinish_BFS(int numCourses, int[][] prerequisites) {
+        //BFS
+        if (prerequisites.length == 0 || ((prerequisites.length == 1) && (prerequisites[0].length == 0))) {
+            return true;
+        }
+        //准备数据
+        //节点计数   这门课之后的课 +1
+        int[] counts = new int[numCourses];
+        //保存这门课之后的课
+        HashMap<Integer, List<Integer>> nodes = new HashMap<>();
+        for (int[] prerequisite : prerequisites) {
+            nodes.computeIfAbsent(prerequisite[1], k -> new LinkedList<>());
+            nodes.get(prerequisite[1]).add(prerequisite[0]);
+            counts[prerequisite[0]]++;
+        }
+
+        for (int i = 0; i < counts.length; i++) {
+            bfs(nodes, i, counts);
+        }
+        for (int count : counts) {
+            if (count > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void bfs(HashMap<Integer, List<Integer>> nodes, int index, int[] counts) {
+        if (counts[index] == 0) {
+            counts[index] = -1;
+            //如果为0
+            List<Integer> integers = nodes.get(index);
+            if (integers == null) {
+                return;
+            }
+            for (int integer : integers) {
+                if (counts[integer] < 0) {
+                    continue;
+                }
+                counts[integer]--;
+                if (counts[integer] == 0) {
+                    bfs(nodes, integer, counts);
+                }
+            }
+
+        }
     }
 }

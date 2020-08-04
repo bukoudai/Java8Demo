@@ -45,4 +45,30 @@ public class LeetCodeTest8 {
 
 
     }
+
+    @Test
+    public void canFinish() {
+
+        int[][] c = new int[][]{{1, 0}, {0, 1}};
+        int[][] d = new int[][]{{1, 0}};
+        int[][] e = new int[][]{{0, 1}};
+        int[][] an1 = new int[][]{{0, 2}, {1, 2}, {2, 0}};
+        int[][] bn1 = new int[][]{{1, 0}, {1, 2}, {0, 1}};
+
+        int[][] f = new int[][]{{2, 0}, {1, 0}, {3, 1}, {3, 2}, {1, 3}};
+//        System.out.println(Solution8.canFinish(2,c));
+//        System.out.println(Solution8.canFinish(2,d));
+//        System.out.println(Solution8.canFinish(2,e));
+//        System.out.println(Solution8.canFinish(3,an1));
+//        System.out.println(Solution8.canFinish(3,bn1));
+
+        System.out.println(Solution8.canFinish_BFS(2, c));
+        System.out.println(Solution8.canFinish_BFS(2, d));
+        System.out.println(Solution8.canFinish_BFS(2, e));
+        System.out.println(Solution8.canFinish_BFS(3, an1));
+        System.out.println(Solution8.canFinish_BFS(3, bn1));
+        System.out.println(Solution8.canFinish_BFS(4, f));
+
+
+    }
 }
