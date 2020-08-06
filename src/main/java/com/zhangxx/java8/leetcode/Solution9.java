@@ -1,6 +1,8 @@
 package com.zhangxx.java8.leetcode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Solution9 {
 
@@ -233,6 +235,63 @@ public class Solution9 {
         result[1] = left[0] + right[0] + root.val;
 
         return result;
+    }
+
+    /**
+     * 336. 回文对
+     * 给定一组唯一的单词， 找出所有不同 的索引对(i, j)，使得列表中的两个单词， words[i] + words[j] ，可拼接成回文串。
+     * <p>
+     * 示例 1:
+     * <p>
+     * 输入: ["abcd","dcba","lls","s","sssll"]
+     * 输出: [[0,1],[1,0],[3,2],[2,4]]
+     * 解释: 可拼接成的回文串为 ["dcbaabcd","abcddcba","slls","llssssll"]
+     * 示例 2:
+     * <p>
+     * 输入: ["bat","tab","cat"]
+     * 输出: [[0,1],[1,0]]
+     * 解释: 可拼接成的回文串为 ["battab","tabbat"]
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/palindrome-pairs
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param words
+     * @return
+     */
+    public List<List<Integer>> palindromePairs(String[] words) {
+        //暴力算法超时   题解的字典树 哈希表 和Manacher 还没看懂T.T
+        List<List<Integer>> ans = new ArrayList<>();
+        if (words.length < 2) {
+            return ans;
+        }
+        for (int i = 0; i < words.length - 1; i++) {
+            for (int j = i + 1; j < words.length; j++) {
+                if (isPalindrome(words[i] + words[j])) {
+                    ArrayList<Integer> list = new ArrayList<>();
+                    list.add(i);
+                    list.add(j);
+                    ans.add(list);
+                }
+                if (isPalindrome(words[j] + words[i])) {
+                    ArrayList<Integer> list = new ArrayList<>();
+                    list.add(j);
+                    list.add(i);
+                    ans.add(list);
+                }
+            }
+        }
+        return ans;
+    }
+
+    public static boolean isPalindrome(String xx) {
+        for (int s = 0, e = xx.length() - 1; s <= e; s++, e--) {
+            if ((xx.charAt(s) != xx.charAt(e))) {
+                return false;
+            }
+        }
+        return true;
+
     }
 
 }
