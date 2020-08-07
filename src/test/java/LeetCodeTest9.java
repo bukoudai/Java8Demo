@@ -38,4 +38,16 @@ public class LeetCodeTest9 {
 
 
     }
+
+    @Test
+    public void flatten() {
+        int[] a = {1, 2};
+
+        TreeNode treeNode = new TreeNode(1);
+        treeNode.left = new TreeNode(2);
+        Solution9.flatten(treeNode);
+        System.out.println(treeNode);
+
+
+    }
 }

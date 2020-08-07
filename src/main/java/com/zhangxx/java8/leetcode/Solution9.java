@@ -353,4 +353,65 @@ public class Solution9 {
         return false;
 
     }
+
+    /**
+     * 114. 二叉树展开为链表
+     * 给定一个二叉树，原地将它展开为一个单链表。
+     * <p>
+     *  
+     * <p>
+     * 例如，给定二叉树
+     * <p>
+     * 1
+     * / \
+     * 2   5
+     * / \   \
+     * 3   4   6
+     * 将其展开为：
+     * <p>
+     * 1
+     * \
+     * 2
+     * \
+     * 3
+     * \
+     * 4
+     * \
+     * 5
+     * \
+     * 6
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param root
+     */
+    public static void flatten(TreeNode root) {
+        if (root != null) {
+            leftFlatten(root);
+        }
+    }
+
+    public static TreeNode leftFlatten(TreeNode root) {
+
+        if (root.left == null) {
+            if (root.right == null) {
+                return root;
+            }
+            return leftFlatten(root.right);
+        }
+        TreeNode tmp = root.right;
+        TreeNode treeNode = leftFlatten(root.left);
+        treeNode.right = tmp;
+        root.right = root.left;
+        root.left = null;
+        if (tmp == null) {
+            return treeNode;
+        }
+        return leftFlatten(tmp);
+
+    }
+
+
 }

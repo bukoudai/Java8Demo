@@ -3,11 +3,12 @@ package com.zhangxx.java8.leetcode;
 import java.util.List;
 
 public class TreeNode {
-    int val;
-    int count;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int val) {
+    public int val;
+    public int count;
+    public TreeNode left;
+    public TreeNode right;
+
+    public TreeNode(int val) {
         this.val = val;
         left = null;
         right = null;
