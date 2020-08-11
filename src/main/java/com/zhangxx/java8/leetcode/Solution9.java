@@ -515,11 +515,101 @@ public class Solution9 {
                 now = 1;
                 ans++;
             }
+        }
+        return ans;
+    }
 
+    /**
+     * 130. 被围绕的区域
+     * 给定一个二维的矩阵，包含 'X' 和 'O'（字母 O）。
+     * <p>
+     * 找到所有被 'X' 围绕的区域，并将这些区域里所有的 'O' 用 'X' 填充。
+     * <p>
+     * 示例:
+     * <p>
+     * X X X X
+     * X O O X
+     * X X O X
+     * X O X X
+     * 运行你的函数后，矩阵变为：
+     * <p>
+     * X X X X
+     * X X X X
+     * X X X X
+     * X O X X
+     * 解释:
+     * <p>
+     * 被围绕的区间不会存在于边界上，换句话说，任何边界上的 'O' 都不会被填充为 'X'。 任何不在边界上，或不与边界上的 'O' 相连的 'O' 最终都会被填充为 'X'。如果两个元素在水平或垂直方向相邻，则称它们是“相连”的。
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/surrounded-regions
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param board
+     */
+    public static void solve(char[][] board) {
+        int h = board.length;
 
+        if (h < 3) {
+            return;
+        }
+        int w = board[0].length;
+        if (w < 3) {
+            return;
+        }
+        //处理四个角
+        if (board[0][0] == 'O') {
+            board[0][0] = '+';
+        }
+        if (board[0][w - 1] == 'O') {
+            board[0][w - 1] = '+';
+        }
+        if (board[h - 1][0] == 'O') {
+            board[h - 1][0] = '+';
+        }
+        if (board[h - 1][w - 1] == 'O') {
+            board[h - 1][w - 1] = '+';
+        }
+        for (int i = 1; i < w - 1; i++) {
+            dfs(board, i, 0, h, w);
+            dfs(board, i, h - 1, h, w);
+        }
+        for (int i = 1; i < h - 1; i++) {
+            dfs(board, 0, i, h, w);
+            dfs(board, w - 1, i, h, w);
+        }
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                char c = board[i][j];
+                if (c == 'O') {
+                    board[i][j] = 'X';
+                } else if (c == '+') {
+                    board[i][j] = 'O';
+                }
+            }
+        }
+    }
+
+    public static void dfs(char[][] board, int x, int y, int h, int w) {
+        if (board[y][x] == 'O') {
+            board[y][x] = '+';
+        } else {
+            return;
+        }
+        if (y != 0) {
+            dfs(board, x, y - 1, h, w);
+        }
+        if (y != h - 1) {
+            dfs(board, x, y + 1, h, w);
+        }
+        if (x != 0) {
+            dfs(board, x - 1, y, h, w);
+        }
+        if (x != w - 1) {
+            dfs(board, x + 1, y, h, w);
         }
 
 
-        return ans;
     }
+
 }

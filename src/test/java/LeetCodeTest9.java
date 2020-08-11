@@ -59,4 +59,14 @@ public class LeetCodeTest9 {
 
 
     }
+
+    @Test
+    public void solve() {
+
+        char[][] a = new char[][]{{'O', 'X', 'O'}, {'X', 'O', 'X'}, {'O', 'X', 'O'}};
+        Solution9.solve(a);
+        System.out.println(a);
+
+
+    }
 }
