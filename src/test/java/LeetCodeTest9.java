@@ -50,4 +50,13 @@ public class LeetCodeTest9 {
 
 
     }
+
+    @Test
+    public void rotate() {
+        String test = "10101";
+
+        System.out.println(Solution9.countBinarySubstrings(test));
+
+
+    }
 }
