@@ -104,4 +104,51 @@ public class Solution10 {
         return _node;
     }
 
+    /**
+     * 22. 括号生成
+     * 数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。
+     * <p>
+     * <p>
+     * <p>
+     * 示例：
+     * <p>
+     * 输入：n = 3
+     * 输出：[
+     * "((()))",
+     * "(()())",
+     * "(())()",
+     * "()(())",
+     * "()()()"
+     * ]
+     *
+     * @param n
+     * @return
+     */
+
+    static ArrayList[] cache = new ArrayList[100];
+
+    public static List<String> generate(int n) {
+        if (cache[n] != null) {
+            return cache[n];
+        }
+        ArrayList<String> ans = new ArrayList<>();
+        if (n == 0) {
+            ans.add("");
+        } else {
+            for (int c = 0; c < n; c++) {
+                for (String left : generate(c)) {
+                    for (String right : generate(n - 1 - c)) {
+                        ans.add("(" + left + ")" + right);
+                    }
+                }
+            }
+        }
+        cache[n] = ans;
+        return ans;
+    }
+
+    public static List<String> generateParenthesis(int n) {
+        return generate(n);
+    }
+
 }

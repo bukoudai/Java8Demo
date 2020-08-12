@@ -23,4 +23,11 @@ public class LeetCodeTest10 {
 
         System.out.println(node);
     }
+
+    @Test
+    public void generateParenthesis() {
+
+
+        System.out.println(Solution10.generateParenthesis(3));
+    }
 }
