@@ -30,4 +30,13 @@ public class LeetCodeTest10 {
 
         System.out.println(Solution10.generateParenthesis(3));
     }
+
+    @Test
+    public void spiralOrder() {
+
+        int[][] f = new int[][]{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
+        int[][] a = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        System.out.println(Solution10.spiralOrder(f));
+        System.out.println(Solution10.spiralOrder(a));
+    }
 }
