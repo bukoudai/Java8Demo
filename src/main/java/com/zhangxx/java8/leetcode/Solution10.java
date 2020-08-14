@@ -1,9 +1,6 @@
 package com.zhangxx.java8.leetcode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Solution10 {
 
@@ -218,6 +215,54 @@ public class Solution10 {
                 numEle--;
             }
             left++;
+        }
+        return ans;
+
+    }
+
+
+    /**
+     * 49. 字母异位词分组
+     * 给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。
+     * <p>
+     * 示例:
+     * <p>
+     * 输入: ["eat", "tea", "tan", "ate", "nat", "bat"]
+     * 输出:
+     * [
+     * ["ate","eat","tea"],
+     * ["nat","tan"],
+     * ["bat"]
+     * ]
+     * 说明：
+     * <p>
+     * 所有输入均为小写字母。
+     * 不考虑答案输出的顺序。
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/group-anagrams
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param strs
+     * @return
+     */
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> ans = new LinkedList<>();
+
+        HashMap<String, List<String>> hash = new HashMap<>();
+        for (String str1 : strs) {
+            char[] str = str1.toCharArray();
+            Arrays.sort(str);
+            String key = new String(str);
+            List<String> strings = hash.get(key);
+            if (strings == null) {
+                LinkedList<String> objects = new LinkedList<>();
+                objects.add(str1);
+                ans.add(objects);
+                hash.put(key, objects);
+            } else {
+                strings.add(str1);
+            }
         }
         return ans;
 
