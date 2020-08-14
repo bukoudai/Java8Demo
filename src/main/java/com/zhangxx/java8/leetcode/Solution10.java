@@ -319,4 +319,54 @@ public class Solution10 {
         return false;
 
     }
+
+    /**
+     * 56. 合并区间
+     * 给出一个区间的集合，请合并所有重叠的区间。
+     * <p>
+     * 示例 1:
+     * <p>
+     * 输入: [[1,3],[2,6],[8,10],[15,18]]
+     * 输出: [[1,6],[8,10],[15,18]]
+     * 解释: 区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].
+     * 示例 2:
+     * <p>
+     * 输入: [[1,4],[4,5]]
+     * 输出: [[1,5]]
+     * 解释: 区间 [1,4] 和 [4,5] 可被视为重叠区间。
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/merge-intervals
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param intervals
+     * @return
+     */
+    public int[][] merge(int[][] intervals) {
+        LinkedList<int[]> list = new LinkedList<>(Arrays.asList(intervals));
+        for (int i = 0; i < list.size(); i++) {
+
+
+            for (int i1 = 0; i1 < list.size(); i1++) {
+                int[] interval = list.get(i);
+                if (i1 == i) {
+                    continue;
+                }
+                int[] ints = list.get(i1);
+                if (interval[1] >= ints[0] && interval[0] <= ints[1]) {
+                    ints[0] = Math.min(interval[0], ints[0]);
+                    ints[1] = Math.max(interval[1], ints[1]);
+                    list.set(i, ints);
+                    list.remove(i1);
+                    i1 = 0;
+                }
+            }
+
+        }
+        int[][] ans = new int[list.size()][];
+        for (int i = 0; i < ans.length; i++) {
+            ans[i] = list.get(i);
+        }
+        return ans;
+    }
 }
