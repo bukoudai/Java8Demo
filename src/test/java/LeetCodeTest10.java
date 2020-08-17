@@ -3,6 +3,7 @@ import com.zhangxx.java8.leetcode.Solution10;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LeetCodeTest10 {
@@ -38,5 +39,13 @@ public class LeetCodeTest10 {
         int[][] a = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         System.out.println(Solution10.spiralOrder(f));
         System.out.println(Solution10.spiralOrder(a));
+    }
+
+    @Test
+    public void generateMatrix() {
+
+
+        System.out.println(Arrays.deepToString(Solution10.generateMatrix(2)));
+
     }
 }
