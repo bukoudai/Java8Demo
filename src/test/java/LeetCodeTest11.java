@@ -11,4 +11,16 @@ public class LeetCodeTest11 {
         System.out.println(Arrays.deepToString(Solution11.insert(f, new int[]{4, 8})));
 
     }
+
+    @Test
+    public void jump() {
+
+        System.out.println(Solution11.jump(new int[]{1, 2, 3}));
+        System.out.println(Solution11.jump(new int[]{3, 2, 1}));
+        System.out.println(Solution11.jump(new int[]{2, 3, 1}));
+        System.out.println(Solution11.jump(new int[]{2, 3, 1, 4}));
+        //                                                1   2          3      4           5
+        System.out.println(Solution11.jump(new int[]{1, 2, 3, 5, 6, 4, 1, 2, 3, 5, 6, 7, 1, 55, 2, 34, 5, 6}));
+
+    }
 }
