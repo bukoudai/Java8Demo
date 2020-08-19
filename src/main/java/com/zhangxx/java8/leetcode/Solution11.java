@@ -107,4 +107,93 @@ public class Solution11 {
         }
         return step;
     }
+
+    /**
+     * 647. 回文子串
+     * 给定一个字符串，你的任务是计算这个字符串中有多少个回文子串。
+     * <p>
+     * 具有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被视作不同的子串。
+     * <p>
+     *  
+     * <p>
+     * 示例 1：
+     * <p>
+     * 输入："abc"
+     * 输出：3
+     * 解释：三个回文子串: "a", "b", "c"
+     * 示例 2：
+     * <p>
+     * 输入："aaa"
+     * 输出：6
+     * 解释：6个回文子串: "a", "a", "a", "aa", "aa", "aaa"
+     *  
+     * <p>
+     * 提示：
+     * <p>
+     * 输入的字符串长度不会超过 1000 。
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/palindromic-substrings
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param s
+     * @return
+     */
+    public static int countSubstrings(String s) {
+
+        int[] manacher = manacher(s);
+        int sum = 0;
+        for (int i = 0; i < manacher.length; i++) {
+            int i1 = manacher[i];
+
+            sum = sum + (i1 / 2) - 1;
+        }
+        return sum;
+    }
+
+    /**
+     * 用Manacher算法求出字符串回文半径数组
+     *
+     * @param str 字符串
+     * @return
+     */
+
+    public static int[] manacher(String str) {
+
+        char[] chars = str.toCharArray();
+        int length = chars.length;
+        //构造新的奇数串
+        char[] newchars = new char[length * 2 + 1];
+        int l = newchars.length;
+        newchars[0] = '#';
+        for (int i = 1; i <= length; i++) {
+            newchars[i * 2 - 1] = chars[i - 1];
+            newchars[i * 2] = '#';
+        }
+
+        //计算每个字符的最大回文半径
+        int[] p = new int[l];
+        //最右边界的对称中心
+        int c = -1;
+        //最右边界
+        int R = -1;
+        for (int i = 0; i < l; i++) {
+            p[i] = R > i ? Math.min(p[2 * c - i], R - i + 1) : 1;
+            while (i + p[i] < newchars.length && i - p[i] > -1) {
+                if (newchars[i - p[i]] == newchars[i + p[i]]) {
+                    p[i]++;
+                } else {
+                    break;
+                }
+            }
+            if (i + p[i] > R) {
+                R = i + p[i] - 1;
+                c = i;
+            }
+
+        }
+
+        return p;
+    }
+
 }

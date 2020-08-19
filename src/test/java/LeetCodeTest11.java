@@ -23,4 +23,15 @@ public class LeetCodeTest11 {
         System.out.println(Solution11.jump(new int[]{1, 2, 3, 5, 6, 4, 1, 2, 3, 5, 6, 7, 1, 55, 2, 34, 5, 6}));
 
     }
+
+    @Test
+    public void manacher() {
+
+
+//        System.out.println(Arrays.toString(Solution11.manacher("abbadcacda")));
+        System.out.println(Arrays.toString(Solution11.manacher("aaaa")));
+//        System.out.println( Solution11.countSubstrings("aaa") );
+
+
+    }
 }
