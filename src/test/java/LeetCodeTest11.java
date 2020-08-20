@@ -47,4 +47,13 @@ public class LeetCodeTest11 {
                 , new char[]{'E', 'E', 'E', 'E', 'E'}}, new int[]{3, 0})));
 
     }
+
+    @Test
+    public void mySqrt() {
+
+
+        //                                                1   2          3      4           5
+        System.out.println(Solution11.mySqrt(100));
+
+    }
 }
