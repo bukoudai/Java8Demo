@@ -282,23 +282,16 @@ public class Solution11 {
         int length = board.length;
         updateBoard_update(board, x, y, length);
 
-        for (int i = 0; i < length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (board[i][j] == '#') {
-                    board[i][j] = 'B';
-                }
-            }
-        }
         return board;
 
 
     }
 
     private static void updateBoard_update(char[][] board, int x, int y, int length) {
-        if (board[y][x] == '#') {
+        if (board[y][x] == 'B') {
             return;
         } else {
-            board[y][x] = '#';
+            board[y][x] = 'B';
         }
         char checkNum = updateBoard_checkNum(board, x, y, length);
         if (checkNum > '0') {
