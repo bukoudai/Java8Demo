@@ -34,4 +34,17 @@ public class LeetCodeTest11 {
 
 
     }
+
+    @Test
+    public void updateBoard() {
+
+
+        //                                                1   2          3      4           5
+        System.out.println(Arrays.deepToString(Solution11.updateBoard(new char[][]{
+                new char[]{'E', 'E', 'E', 'E', 'E'}
+                , new char[]{'E', 'E', 'M', 'E', 'E'}
+                , new char[]{'E', 'E', 'E', 'E', 'E'}
+                , new char[]{'E', 'E', 'E', 'E', 'E'}}, new int[]{3, 0})));
+
+    }
 }
