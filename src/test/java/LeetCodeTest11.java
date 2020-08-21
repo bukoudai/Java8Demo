@@ -56,4 +56,17 @@ public class LeetCodeTest11 {
         System.out.println(Solution11.mySqrt(100));
 
     }
+
+    @Test
+    public void simplifyPath() {
+
+
+        //                                                1   2          3      4           5
+        System.out.println(Solution11.simplifyPath("/a/b/c"));
+        System.out.println(Solution11.simplifyPath("/a/./b/../../c/"));
+        System.out.println(Solution11.simplifyPath("/../"));
+        System.out.println(Solution11.simplifyPath("/..."));
+        System.out.println(Solution11.simplifyPath("/../"));
+
+    }
 }
