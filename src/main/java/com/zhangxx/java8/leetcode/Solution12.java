@@ -182,7 +182,7 @@ public class Solution12 {
             }
         }
 
-        for (int i = s; i < e; i++) {
+        for (int i = s; i <= e; i++) {
             nums[i] = 1;
         }
     }
