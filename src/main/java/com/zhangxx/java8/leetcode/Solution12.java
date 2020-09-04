@@ -1,5 +1,6 @@
 package com.zhangxx.java8.leetcode;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Solution12 {
@@ -184,6 +185,61 @@ public class Solution12 {
 
         for (int i = s; i <= e; i++) {
             nums[i] = 1;
+        }
+    }
+
+    /**
+     * 257. 二叉树的所有路径
+     * 给定一个二叉树，返回所有从根节点到叶子节点的路径。
+     * <p>
+     * 说明: 叶子节点是指没有子节点的节点。
+     * <p>
+     * 示例:
+     * <p>
+     * 输入:
+     * <p>
+     * 1
+     * /   \
+     * 2     3
+     * \
+     * 5
+     * <p>
+     * 输出: ["1->2->5", "1->3"]
+     * <p>
+     * 解释: 所有根节点到叶子节点的路径为: 1->2->5, 1->3
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/binary-tree-paths
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param root
+     * @return
+     */
+    public List<String> binaryTreePaths(TreeNode root) {
+
+        List<String> ans = new ArrayList<>();
+
+        binaryTreePaths_check(root, ans, "");
+
+
+        return ans;
+    }
+
+    public static void binaryTreePaths_check(TreeNode root, List<String> ans, String value) {
+        if (root != null) {
+            value = value + root.val;
+            if (root.left == null && root.right == null) {
+                ans.add(value);
+                return;
+            }
+            if (root.left != null) {
+                binaryTreePaths_check(root.left, ans, value + "->");
+
+            }
+            if (root.right != null) {
+                binaryTreePaths_check(root.right, ans, value + "->");
+
+            }
         }
     }
 }
