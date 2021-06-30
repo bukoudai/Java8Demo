@@ -52,6 +52,7 @@ public class LeetCodeTest2 {
         System.out.println(Solution2.findMedianSortedArrays(a, b));
 
     }
+
     @Test
     public void longestPalindrome() {
 
@@ -61,14 +62,16 @@ public class LeetCodeTest2 {
         System.out.println(Solution2.longestPalindrome("aa"));
 
     }
+
     @Test
     public void convert() {
 
 
-        System.out.println(Solution2.convert("LEETCODEISHIRING",4));
+        System.out.println(Solution2.convert("LEETCODEISHIRING", 4));
 
 
     }
+
     @Test
     public void reverse() {
 
@@ -79,32 +82,33 @@ public class LeetCodeTest2 {
 
 
     }
+
     @Test
     public void myAtoi() {
 
 
         System.out.println(Solution2.myAtoi("42"));
-        System.out.println(Solution2.myAtoi( "   -42"));
-        System.out.println(Solution2.myAtoi( "4193 with words"));
-        System.out.println(Solution2.myAtoi(  "words and 987"));
-        System.out.println(Solution2.myAtoi(  "-91283472332"));
-        System.out.println(Solution2.myAtoi(  ""));
-        System.out.println(Solution2.myAtoi(  " "));
-        System.out.println(Solution2.myAtoi(  "-"));
-        System.out.println(Solution2.myAtoi(  "-+2"));
-        System.out.println(Solution2.myAtoi(  "20000000000000000000"));
-
+        System.out.println(Solution2.myAtoi("   -42"));
+        System.out.println(Solution2.myAtoi("4193 with words"));
+        System.out.println(Solution2.myAtoi("words and 987"));
+        System.out.println(Solution2.myAtoi("-91283472332"));
+        System.out.println(Solution2.myAtoi(""));
+        System.out.println(Solution2.myAtoi(" "));
+        System.out.println(Solution2.myAtoi("-"));
+        System.out.println(Solution2.myAtoi("-+2"));
+        System.out.println(Solution2.myAtoi("20000000000000000000"));
 
 
     }
+
     @Test
     public void isBipartite() {
 
 
         int[] a = {1, 2, 3};
-        int[] b = {0,2};
+        int[] b = {0, 2};
         int[] c = {0, 1, 3};
-        int[] d = {0,2};
+        int[] d = {0, 2};
         int[][] t = new int[4][];
         t[0] = a;
         t[1] = b;
@@ -113,12 +117,13 @@ public class LeetCodeTest2 {
         System.out.println(Solution2.isBipartite(t));
 
     }
+
     @Test
     public void isBipartite2() {
-        int[] a = {1,3};
-        int[] b = {0,2};
-        int[] c = {1,3};
-        int[] d = {0,2};
+        int[] a = {1, 3};
+        int[] b = {0, 2};
+        int[] c = {1, 3};
+        int[] d = {0, 2};
         int[][] t = new int[4][];
         t[0] = a;
         t[1] = b;
@@ -130,12 +135,12 @@ public class LeetCodeTest2 {
 
     @Test
     public void isBipartite3() {
-   //     [[3],[2,4],[1],[0,4],[1,3]]
+        //     [[3],[2,4],[1],[0,4],[1,3]]
         int[] a = {3};
-        int[] b = {2,4};
+        int[] b = {2, 4};
         int[] c = {1};
-        int[] d = {0,4};
-        int[] e = {1,3};
+        int[] d = {0, 4};
+        int[] e = {1, 3};
         int[][] t = new int[5][];
         t[0] = a;
         t[1] = b;

@@ -6,10 +6,9 @@ public class SwingTest {
     public static void main(String[] args) {
         System.out.println("Holle Java8");
 
-        JFrame jframe= new JFrame("My JFrame");
+        JFrame jframe = new JFrame("My JFrame");
 
-        JButton jButton= new JButton("My JButton");
-
+        JButton jButton = new JButton("My JButton");
 
 
         jButton.addActionListener(event -> {

@@ -7,13 +7,15 @@ public abstract class BaseRuleScore {
 
     /**
      * 判断是否符合规则
+     *
      * @param integerList
      * @return
      */
-     abstract boolean checked(List<Integer> integerList) ;
+    abstract boolean checked(List<Integer> integerList);
 
     /**
      * 计算得分
+     *
      * @param integerList
      * @return
      */

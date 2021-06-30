@@ -2,9 +2,10 @@ package com.zhangxx.java8.yatzyGame.RuleScore;
 
 import java.util.List;
 
-public class ThreeOfAKingRule  extends BaseRuleScore {
+public class ThreeOfAKingRule extends BaseRuleScore {
 
-    Integer maxValue=0;
+    Integer maxValue = 0;
+
     /**
      * 判断是否符合规则
      *
@@ -16,12 +17,12 @@ public class ThreeOfAKingRule  extends BaseRuleScore {
         int[] counts = new int[7];
         //[0]{},[1]{1},[2]{1},[3]{1},[4]{1},[5]{1},[6]{1}
         for (int i = 0; i < integerList.size(); i++) {
-            counts[integerList.get(i)-1]++;
+            counts[integerList.get(i) - 1]++;
 
         }
         for (int i = 1; i < counts.length; i++) {
-            if ((counts[i]>=3)) {
-                maxValue=i;
+            if ((counts[i] >= 3)) {
+                maxValue = i;
                 return true;
             }
         }
@@ -37,8 +38,8 @@ public class ThreeOfAKingRule  extends BaseRuleScore {
      */
     @Override
     public Integer calulate(List<Integer> integerList) {
-        int i = checked(integerList)?maxValue*3:0;
-        System.out.println(this.getClass().toString()+"==="+i);
+        int i = checked(integerList) ? maxValue * 3 : 0;
+        System.out.println(this.getClass().toString() + "===" + i);
         return i;
     }
 }

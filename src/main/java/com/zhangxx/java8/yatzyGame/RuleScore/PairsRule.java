@@ -2,8 +2,9 @@ package com.zhangxx.java8.yatzyGame.RuleScore;
 
 import java.util.List;
 
-public class PairsRule  extends BaseRuleScore {
-    Integer maxValue=0;
+public class PairsRule extends BaseRuleScore {
+    Integer maxValue = 0;
+
     /**
      * 判断是否符合规则
      *
@@ -19,15 +20,15 @@ public class PairsRule  extends BaseRuleScore {
             counts[integerList.get(i)]++;
 
         }
-        boolean flag=false;
+        boolean flag = false;
         for (int i = 1; i < counts.length; i++) {
-            if ((counts[i]>=2)) {
-                if(i>maxValue){
-                    maxValue=i;
+            if ((counts[i] >= 2)) {
+                if (i > maxValue) {
+                    maxValue = i;
                 }
 
 
-                flag= true;
+                flag = true;
             }
         }
 
@@ -42,8 +43,8 @@ public class PairsRule  extends BaseRuleScore {
      */
     @Override
     public Integer calulate(List<Integer> integerList) {
-        int i = checked(integerList)?maxValue*2:0;
-        System.out.println(this.getClass().toString()+"==="+i);
+        int i = checked(integerList) ? maxValue * 2 : 0;
+        System.out.println(this.getClass().toString() + "===" + i);
         return i;
     }
 }

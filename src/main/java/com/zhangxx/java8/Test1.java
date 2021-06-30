@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 public class Test1 {
 
@@ -18,16 +16,16 @@ public class Test1 {
 
 
     public static void main(String[] args) {
-        List<Integer> list = Arrays.asList(1,2,3,4,5,6,7,8,9,0);
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 0);
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
 
         }
-        Map<String,Object> map = new HashMap<>();
-        map.put("1","2" );
+        Map<String, Object> map = new HashMap<>();
+        map.put("1", "2");
 
 
-        map.forEach((String, Object) -> System.out.println(String+Object));
+        map.forEach((String, Object) -> System.out.println(String + Object));
         System.out.println("---------------------");
         list.forEach(System.out::println);
     }

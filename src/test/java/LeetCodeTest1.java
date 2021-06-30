@@ -60,7 +60,6 @@ public class LeetCodeTest1 {
         int[] b = {5, 2, 6, 1};
 
 
-
 //        System.out.println(Solution1.countSmaller(a));
         System.out.println(Solution1.countSmaller(b));
 

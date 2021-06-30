@@ -7,34 +7,39 @@ import java.util.zip.*;
 
 /**
  * java.util.zip压缩/解压文件
- * */
+ */
 public class ZipUtil {
 
-    /** 缓冲器大小 */
+    /**
+     * 缓冲器大小
+     */
     private static final int BUFFER = 512;
 
-    /**压缩得到的文件的后缀名*/
-    private static final String SUFFIX=".zip";
+    /**
+     * 压缩得到的文件的后缀名
+     */
+    private static final String SUFFIX = ".zip";
 
     /**
      * 得到源文件路径的所有文件
+     *
      * @param dirFile 压缩源文件路径
-     * */
-    public static List<File> getAllFile(File dirFile){
+     */
+    public static List<File> getAllFile(File dirFile) {
 
-        List<File> fileList=new ArrayList<>();
+        List<File> fileList = new ArrayList<>();
 
-        File[] files= dirFile.listFiles();
-        for(File file:files){//文件
-            if(file.isFile()){
+        File[] files = dirFile.listFiles();
+        for (File file : files) {//文件
+            if (file.isFile()) {
                 fileList.add(file);
-                System.out.println("add file:"+file.getName());
-            }else {//目录
-                if(file.listFiles().length!=0){//非空目录
+                System.out.println("add file:" + file.getName());
+            } else {//目录
+                if (file.listFiles().length != 0) {//非空目录
                     fileList.addAll(getAllFile(file));//把递归文件加到fileList中
-                }else {//空目录
+                } else {//空目录
                     fileList.add(file);
-                    System.out.println("add empty dir:"+file.getName());
+                    System.out.println("add empty dir:" + file.getName());
                 }
             }
         }
@@ -43,23 +48,23 @@ public class ZipUtil {
 
     /**
      * 获取相对路径
+     *
      * @param dirPath 源文件路径
-     * @param file 准备压缩的单个文件
-     * */
-    public static String getRelativePath(String dirPath,File file){
-        File dirFile=new File(dirPath);
-        String relativePath=file.getName();
+     * @param file    准备压缩的单个文件
+     */
+    public static String getRelativePath(String dirPath, File file) {
+        File dirFile = new File(dirPath);
+        String relativePath = file.getName();
 
-        while (true){
-            file=file.getParentFile();
-            if(file==null){
+        while (true) {
+            file = file.getParentFile();
+            if (file == null) {
                 break;
             }
-            if(file.equals(dirFile)){
+            if (file.equals(dirFile)) {
                 break;
-            }
-            else {
-                relativePath=file.getName()+"/"+relativePath;
+            } else {
+                relativePath = file.getName() + "/" + relativePath;
             }
         }
         return relativePath;
@@ -67,44 +72,46 @@ public class ZipUtil {
 
     /**
      * 获取相对路径
-     * @param dirPath 源文件路径
-     * @param file 准备压缩的单个文件
+     *
+     * @param dirPath  源文件路径
+     * @param file     准备压缩的单个文件
      * @param haveName 是否包含待压缩目录
-     * */
-    public static String getRelativePath(String dirPath,File file,boolean haveName){
+     */
+    public static String getRelativePath(String dirPath, File file, boolean haveName) {
 
 
-        File dirFile=new File(dirPath);
-        String relativePath=file.getName();
+        File dirFile = new File(dirPath);
+        String relativePath = file.getName();
 
-        while (true){
-            file=file.getParentFile();
-            if(file==null){
+        while (true) {
+            file = file.getParentFile();
+            if (file == null) {
                 break;
             }
-            if(file.equals(test(dirFile,haveName))){
+            if (file.equals(test(dirFile, haveName))) {
                 break;
-            }
-            else {
-                relativePath=file.getName()+"/"+relativePath;
+            } else {
+                relativePath = file.getName() + "/" + relativePath;
             }
         }
         return relativePath;
     }
-public static File test(File dirFile,boolean haveName){
-    if (haveName) {
-        return dirFile.getParentFile();
-    }else {
-        return dirFile;
+
+    public static File test(File dirFile, boolean haveName) {
+        if (haveName) {
+            return dirFile.getParentFile();
+        } else {
+            return dirFile;
+        }
+
+
     }
 
-
-}
     /**
-     *@param destPath 解压目标路径
-     *@param fileName 解压文件的相对路径
-     * */
-    public static File createFile(String destPath, String fileName){
+     * @param destPath 解压目标路径
+     * @param fileName 解压文件的相对路径
+     */
+    public static File createFile(String destPath, String fileName) {
 
         String[] dirs = fileName.split("/");//将文件名的各级目录分解
         File file = new File(destPath);
@@ -145,30 +152,32 @@ public static File test(File dirFile,boolean haveName){
 
     /**
      * 没有指定压缩目标路径进行压缩,用默认的路径进行压缩
+     *
      * @param dirPath 压缩源文件路径
-     * */
-    public static void compress(String dirPath){
+     */
+    public static void compress(String dirPath) {
 
-        int firstIndex= dirPath.indexOf("/");
-        int lastIndex= dirPath.lastIndexOf("/");
-        String zipFileName=dirPath.substring(0,firstIndex+1)+dirPath.substring(lastIndex+1);
-        compress(dirPath,dirPath);
+        int firstIndex = dirPath.indexOf("/");
+        int lastIndex = dirPath.lastIndexOf("/");
+        String zipFileName = dirPath.substring(0, firstIndex + 1) + dirPath.substring(lastIndex + 1);
+        compress(dirPath, dirPath);
     }
 
     /**
      * 压缩文件
-     * @param dirPath 压缩源文件路径
+     *
+     * @param dirPath     压缩源文件路径
      * @param zipFileName 压缩目标文件路径
-     * */
-    public static void compress(String dirPath,String zipFileName){
+     */
+    public static void compress(String dirPath, String zipFileName) {
 
 
-        zipFileName=zipFileName+SUFFIX;//添加文件的后缀名
+        zipFileName = zipFileName + SUFFIX;//添加文件的后缀名
         creaZipFile(zipFileName);
-        File dirFile=new File(dirPath);
-        List<File> fileList= getAllFile(dirFile);
+        File dirFile = new File(dirPath);
+        List<File> fileList = getAllFile(dirFile);
 
-        byte[] buffer=new byte[BUFFER];
+        byte[] buffer = new byte[BUFFER];
         ZipEntry zipEntry;
         int readLength;     //每次读取出来的长度
 
@@ -178,28 +187,28 @@ public static File test(File dirFile,boolean haveName){
                     zipFileName), new CRC32());
             ZipOutputStream zos = new ZipOutputStream(cos);
 
-            for(File file:fileList){
+            for (File file : fileList) {
 
 
-                if(file.isFile()){   //若是文件，则压缩文件
-                    String relativePath = getRelativePath(dirPath, file,true);
-                    zipEntry=new ZipEntry(relativePath);  //
+                if (file.isFile()) {   //若是文件，则压缩文件
+                    String relativePath = getRelativePath(dirPath, file, true);
+                    zipEntry = new ZipEntry(relativePath);  //
                     zipEntry.setSize(file.length());
                     zipEntry.setTime(file.lastModified());
                     zos.putNextEntry(zipEntry);
 
-                    InputStream is=new BufferedInputStream(new FileInputStream(file));
+                    InputStream is = new BufferedInputStream(new FileInputStream(file));
 
-                    while ((readLength=is.read(buffer,0,BUFFER))!=-1){
-                        zos.write(buffer,0,readLength);
+                    while ((readLength = is.read(buffer, 0, BUFFER)) != -1) {
+                        zos.write(buffer, 0, readLength);
                     }
                     is.close();
-                    System.out.println("file compress:"+file.getCanonicalPath());
-                }else {     //若是空目录，则写入zip条目中
-                    String relativePath = getRelativePath(dirPath, file,true);
-                    zipEntry=new ZipEntry(relativePath);
+                    System.out.println("file compress:" + file.getCanonicalPath());
+                } else {     //若是空目录，则写入zip条目中
+                    String relativePath = getRelativePath(dirPath, file, true);
+                    zipEntry = new ZipEntry(relativePath);
                     zos.putNextEntry(zipEntry);
-                    System.out.println("dir compress: " + file.getCanonicalPath()+"/");
+                    System.out.println("dir compress: " + file.getCanonicalPath() + "/");
                 }
             }
             zos.close();  //最后得关闭流，不然压缩最后一个文件会出错
@@ -210,30 +219,30 @@ public static File test(File dirFile,boolean haveName){
 
     /**
      * 解压
-     * */
-    public static void decompress(String zipFileName,String destPath){
+     */
+    public static void decompress(String zipFileName, String destPath) {
 
         try {
 
-            zipFileName=zipFileName+SUFFIX;
-            ZipInputStream zis=new ZipInputStream(new FileInputStream(zipFileName));
-            ZipEntry       zipEntry       = null;
-            byte[]         buffer         = new byte[BUFFER];//缓冲器
-            int            readLength     = 0;//每次读出来的长度
-            while ((zipEntry=zis.getNextEntry())!=null){
-                if(zipEntry.isDirectory()){//若是目录
-                    File file=new File(destPath+"/"+zipEntry.getName());
-                    if(!file.exists()){
+            zipFileName = zipFileName + SUFFIX;
+            ZipInputStream zis = new ZipInputStream(new FileInputStream(zipFileName));
+            ZipEntry zipEntry = null;
+            byte[] buffer = new byte[BUFFER];//缓冲器
+            int readLength = 0;//每次读出来的长度
+            while ((zipEntry = zis.getNextEntry()) != null) {
+                if (zipEntry.isDirectory()) {//若是目录
+                    File file = new File(destPath + "/" + zipEntry.getName());
+                    if (!file.exists()) {
                         file.mkdirs();
-                        System.out.println("mkdirs:"+file.getCanonicalPath());
+                        System.out.println("mkdirs:" + file.getCanonicalPath());
                         continue;
                     }
                 }//若是文件
-                File file = createFile(destPath,zipEntry.getName());
+                File file = createFile(destPath, zipEntry.getName());
                 System.out.println("file created: " + file.getCanonicalPath());
-                OutputStream os=new FileOutputStream(file);
-                while ((readLength=zis.read(buffer,0,BUFFER))!=-1){
-                    os.write(buffer,0,readLength);
+                OutputStream os = new FileOutputStream(file);
+                while ((readLength = zis.read(buffer, 0, BUFFER)) != -1) {
+                    os.write(buffer, 0, readLength);
                 }
                 os.close();
                 System.out.println("file uncompressed: " + file.getCanonicalPath());
@@ -249,9 +258,9 @@ public static File test(File dirFile,boolean haveName){
 
     private static void creaZipFile(String zipFileName) {
         try {
-            int lastIndex = zipFileName.lastIndexOf( "/" );
-            File mPathName = new File( zipFileName.substring(0, lastIndex));
-            System.out.println("creaZipFile mPathName:"+mPathName);
+            int lastIndex = zipFileName.lastIndexOf("/");
+            File mPathName = new File(zipFileName.substring(0, lastIndex));
+            System.out.println("creaZipFile mPathName:" + mPathName);
             if (!mPathName.exists()) {
                 mPathName.mkdirs();
             }
@@ -259,7 +268,7 @@ public static File test(File dirFile,boolean haveName){
             if (!mZipFile.exists()) {
                 mZipFile.createNewFile();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

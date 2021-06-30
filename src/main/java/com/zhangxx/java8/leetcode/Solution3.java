@@ -341,7 +341,7 @@ public class Solution3 {
         int right = matrix[n - 1][n - 1];
         while (left < right) {
             int mid = left + ((right - left) >> 1);
-            if (check(matrix, mid, k )) {
+            if (check(matrix, mid, k)) {
                 right = mid;
             } else {
                 left = mid + 1;
@@ -350,7 +350,7 @@ public class Solution3 {
         return left;
     }
 
-    public static  boolean check(int[][] matrix, int mid, int k) {
+    public static boolean check(int[][] matrix, int mid, int k) {
         int i = matrix.length - 1;
         int j = 0;
         int num = 0;
@@ -366,26 +366,26 @@ public class Solution3 {
     }
 
 
-
     /**
      * 167. 两数之和 II - 输入有序数组
      * 给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。
-     *
+     * <p>
      * 函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。
-     *
+     * <p>
      * 说明:
-     *
+     * <p>
      * 返回的下标值（index1 和 index2）不是从零开始的。
      * 你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。
      * 示例:
-     *
+     * <p>
      * 输入: numbers = [2, 7, 11, 15], target = 9
      * 输出: [1,2]
      * 解释: 2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。
-     *
+     * <p>
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
      * @param numbers
      * @param target
      * @return
@@ -397,8 +397,8 @@ public class Solution3 {
         while (left <= right) {
 
             if ((numbers[right] - target) + numbers[left] == 0) {
-                ans[0] = left+1;
-                ans[1] = right+1;
+                ans[0] = left + 1;
+                ans[1] = right + 1;
 
                 break;
             }
@@ -415,35 +415,34 @@ public class Solution3 {
 
 
     /**
-     *
      * 97. 交错字符串
      * 给定三个字符串 s1, s2, s3, 验证 s3 是否是由 s1 和 s2 交错组成的。
-     *
+     * <p>
      *  
-     *
+     * <p>
      * 示例 1：
-     *
+     * <p>
      * 输入：s1 = "aa bc c", s2 = "db bc a", s3 = "aa db bc bc ac"
      * 输出：true
      * 示例 2：
-     *
+     * <p>
      * 输入：s1 = "aa b c c", s2 = "db b ca", s3 = "aa db bb accc"
      * 输出：false
-     *
+     * <p>
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode-cn.com/problems/interleaving-string
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
      * @param s1
      * @param s2
      * @param s3
-     *
      * @return
      */
-    public static  boolean isInterleave(String s1, String s2, String s3) {
+    public static boolean isInterleave(String s1, String s2, String s3) {
         int length3 = s3.length();
         int length1 = s2.length();
         int length2 = s1.length();
-        if (length1+length2!= length3) {
+        if (length1 + length2 != length3) {
             return false;
         }
 
@@ -458,7 +457,7 @@ public class Solution3 {
                 }
                 int p = i + j - 1;
                 if (i > 0) {
-                    dp[i][j] =   (dp[i - 1][j] && s1.charAt(i - 1) == s3.charAt(p));
+                    dp[i][j] = (dp[i - 1][j] && s1.charAt(i - 1) == s3.charAt(p));
                 }
                 if (j > 0) {
                     dp[i][j] = dp[i][j] || (dp[i][j - 1] && s2.charAt(j - 1) == s3.charAt(p));
@@ -467,7 +466,7 @@ public class Solution3 {
 
         }
 
-        return  dp[length1][length2];
+        return dp[length1][length2];
     }
 }
 

@@ -676,6 +676,7 @@ public class Solution2 {
 
         return true;
     }
+
     private static boolean dfs(int node, int c, int[][] graph, int[] color) {
 
         color[node] = c;

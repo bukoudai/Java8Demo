@@ -2,11 +2,10 @@ package com.zhangxx.java8.yatzyGame.RuleScore;
 
 import java.util.List;
 
-public class FourOfAKingRule  extends BaseRuleScore {
+public class FourOfAKingRule extends BaseRuleScore {
 
 
-    Integer maxValue=0;
-
+    Integer maxValue = 0;
 
 
     /**
@@ -26,13 +25,13 @@ public class FourOfAKingRule  extends BaseRuleScore {
 
         }
         for (int i = 1; i < counts.length; i++) {
-            if ((counts[i]>=4)) {
-                maxValue=i;
+            if ((counts[i] >= 4)) {
+                maxValue = i;
                 return true;
             }
         }
 
-       return false;
+        return false;
     }
 
     /**
@@ -43,8 +42,8 @@ public class FourOfAKingRule  extends BaseRuleScore {
      */
     @Override
     public Integer calulate(List<Integer> integerList) {
-        int i =  checked(integerList)?maxValue*4:0;
-        System.out.println(this.getClass().toString()+"==="+i);
+        int i = checked(integerList) ? maxValue * 4 : 0;
+        System.out.println(this.getClass().toString() + "===" + i);
         return i;
     }
 
