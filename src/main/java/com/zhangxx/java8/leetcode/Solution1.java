@@ -249,8 +249,7 @@ public class Solution1 {
             //一天没法卖出
             return 0;
         }
-        ;
-        int dp[][] = new int[n][3];
+        int[][] dp = new int[n][3];
         //第一天只能买入 收益为 负
         dp[0][0] = -prices[0];
         for (int i = 1; i < n; i++) {

@@ -536,7 +536,7 @@ public class Solution4 {
 
     private static String longestCommonPrefix_CommonPrefix(String prefix, String str) {
 
-        if (str.equals("") || prefix.equals("")) {
+        if ("".equals(str) || "".equals(prefix)) {
             return "";
         }
         if (prefix.length() > str.length()) {
