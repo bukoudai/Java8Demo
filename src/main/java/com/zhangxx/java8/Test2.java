@@ -2,32 +2,32 @@ package com.zhangxx.java8;
 
 @FunctionalInterface
 interface MyInteface {
-    void test();
+  void test();
 
-    @Override
-    String toString();
+  @Override
+  String toString();
 }
 
 public class Test2 {
 
-    void myTest(MyInteface myInteface) {
-        System.out.println(1);
-        myInteface.test();
-        System.out.println(2);
-    }
+  void myTest(MyInteface myInteface) {
+    System.out.println(1);
+    myInteface.test();
+    System.out.println(2);
+  }
 
-    public static void main(String[] args) {
-        Test2 test2 = new Test2();
-
-
-        test2.myTest(() -> System.out.println(1.5));
+  public static void main(String[] args) {
+    Test2 test2 = new Test2();
 
 
-        MyInteface myInteface = () -> System.out.println(2.5);
+    test2.myTest(() -> System.out.println(1.5));
 
-        test2.myTest(myInteface);
-        System.out.println(myInteface.getClass());
-        System.out.println(myInteface.getClass().getSuperclass());
-        System.out.println(myInteface.getClass().getInterfaces()[0]);
-    }
+
+    MyInteface myInteface = () -> System.out.println(2.5);
+
+    test2.myTest(myInteface);
+    System.out.println(myInteface.getClass());
+    System.out.println(myInteface.getClass().getSuperclass());
+    System.out.println(myInteface.getClass().getInterfaces()[0]);
+  }
 }

@@ -6,12 +6,12 @@ import java.util.List;
 
 public class StringComparator {
 
-    public static void main(String[] args) {
-        List<String> name = Arrays.asList("zhang", "lisi", "wangwu", "zhangliu");
+  public static void main(String[] args) {
+    List<String> name = Arrays.asList("zhang", "lisi", "wangwu", "zhangliu");
 
 
-        Collections.sort(name, (o1, o2) -> 0);
-        System.out.println(name);
+    Collections.sort(name, (o1, o2) -> 0);
+    System.out.println(name);
 
-    }
+  }
 }

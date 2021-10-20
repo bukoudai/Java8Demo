@@ -8,12 +8,12 @@ import java.util.UUID;
 public class Test3 {
 
 
-    public static void main(String[] args) {
-        List<String> list = Arrays.asList("hello", "world", "hello world");
+  public static void main(String[] args) {
+    List<String> list = Arrays.asList("hello", "world", "hello world");
 
 
-        //list.forEach((String)-> System.out.println(String.toUpperCase()));
-        List<String> list2 = new ArrayList<>();
+    //list.forEach((String)-> System.out.println(String.toUpperCase()));
+    List<String> list2 = new ArrayList<>();
 
 //        list.forEach(String->list2.add(String .toUpperCase()));
 //
@@ -27,8 +27,8 @@ public class Test3 {
 //        Function<Object,String> function = Object::toString;
 //        System.out.println(function.getClass().getInterfaces()[0]);
 
-        UUID uuid = UUID.randomUUID();
-        String s = uuid.toString().replaceAll("-", "");
-        System.out.println(s);
-    }
+    UUID uuid = UUID.randomUUID();
+    String s = uuid.toString().replaceAll("-", "");
+    System.out.println(s);
+  }
 }
