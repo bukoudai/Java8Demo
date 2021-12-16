@@ -1,5 +1,6 @@
 import com.zhangxx.java8.leetcode.Solution2;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 
 public class LeetCodeTest2 {
 

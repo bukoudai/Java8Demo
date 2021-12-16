@@ -1,6 +1,7 @@
 import com.zhangxx.java8.leetcode.Node;
 import com.zhangxx.java8.leetcode.Solution10;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;

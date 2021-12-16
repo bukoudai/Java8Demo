@@ -1,6 +1,7 @@
 import com.zhangxx.java8.leetcode.Solution4;
 import com.zhangxx.java8.leetcode.TreeNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 
 public class LeetCodeTest4 {
 
